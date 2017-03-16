@@ -2,7 +2,8 @@ const express = require('express');
 const hbs = require('hbs');
 const mongoose = require("mongoose");
 const {User} = require('./models/user');
-const {qa} = require("./models/qa")
+const {qa} = require("./models/qa");
+const {result}= require("./models/result")
 const{MongoClient}= require("./db/mongo");
 const _ = require("lodash");
 
@@ -19,16 +20,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('view engine','hbs');
 hbs.registerPartials(__dirname+'./../views/partials');
-app.get('/get',(req,res)=>
-{
-var query = User.find();
-query.exec(function (err, docs) {
-  
-  // console.log(docs);
-  res.send(docs);
- 
-});
-	});
+
+
 
 //POST QUESTIONS // PostQuestions.html
 app.post(('/postQuestions'),(req,res)=>{
@@ -36,9 +29,7 @@ app.post(('/postQuestions'),(req,res)=>{
 	var question_Id=mongoose.Types.ObjectId();
 	body.question_Id=question_Id;
 	var que = new qa(body);
-	console.log(body);
 	que.save().then((doc)=>{
-		console.log(doc);
 		res.send("posted");
 	})
 }
@@ -46,15 +37,33 @@ app.post(('/postQuestions'),(req,res)=>{
 
 
 app.get('/check',(req,res)=>{
-	qa.find({},'question').then((doc)=>{
-	res.send(doc[0].question);
+	qa.find({},'question a').then((doc)=>{
+		console.log(doc);
+	res.send(doc[0].question,doc[0].a);
 	console.log(doc);
 }).catch((e)=>{
 	res.send(e);
 })})
 
 
+//send an array of question and answer to browser via ajax call at onload
+app.get("/log",(req,res)=>{
+qa.find({},'question a b c d').then((doc)=>{
+// res.render(('exampage.hbs',{que:doc[0].question,a:doc[0].a,b:doc[0].b,c:doc[0].c,d:doc[0].d}),locations);
+res.json(doc);
+})})
 
+//
+app.post("/result",(req,res)=>{
+	var body=_.pick(req.body,['answer']);
+	body.user="user";
+	var res = new result(body);
+	res.save().then((doc)=>{
+		console.log(doc);
+	}).catch((e)=>{
+		console.log(e);
+	})
+})
 
 
 
@@ -62,19 +71,19 @@ app.get('/check',(req,res)=>{
 app.post('/postUserData',(req,res)=>{
 var user = new User(req.body);
 user.save().then((doc)=>{
-	if(!doc){
+	if(!doc)
+	{
 		res.status(400).send();
 	}
-var question = qa.findOne({}).select('question');
-console.log(question);
-	res.render('exampage.hbs',{que:""});
-	}
+	qa.find({},'question a b c d').then((doc)=>{
+	res.render('exampage.hbs',{que:doc[0].question,a:doc[0].a,b:doc[0].b,c:doc[0].c,d:doc[0].d});
 
-	).catch((e)=>
-	{
-		return Promise.reject(e);
-	}
-)});
+}).catch((e)=>{
+	res.send(e);
+	return Promise.reject(e);
+})}).catch((e)=>{
+	res.send("could not save");
+})});
 
 
 app.get('/',(req,res)=>{
