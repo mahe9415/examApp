@@ -1,20 +1,21 @@
 const mongoose = require("mongoose");
-const validator = require("validator")
-
-var qa = mongoose.Schema({
+var qaSchema = mongoose.Schema({
 question :
 {
 	type:String,
-}
+},
 question_Id:{
-	type: mongoose.Schema.Type.ObjectId
+	type: mongoose.Schema.ObjectId
+},
+question_Type :{
+	type: String,
+	required:true
 },
 category :
 {
 	type:String,
 	required:true
-}
-options :[{
+},
 	a:{
 		type:String
 	},
@@ -27,5 +28,9 @@ options :[{
 	d:{
 		type:String
 	}
-}]
 });
+
+
+var qa=mongoose.model('questions',qaSchema);
+
+module.exports={qa};

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head> 
+ <title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/css/lib/bootstrap-iso.css" /> 
+<link rel="stylesheet" href="/css/lib/fw/css/font-awesome.min.css" />
+<link rel="stylesheet" href="/css/lib/bootstrap.min.css"/>  
+
+<style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}.form-horizontal{display:block;width:100%;margin-left:240px;}.mt-0{
+      margin-top: 0;
+    }
+    .well {
+      background-color:white;
+    }
+    .bootstrap-iso .btn{
+      margin-left: 415px;
+      border-radius: 2px;
+    }
+</style>
+</head>
+<body>
+<div calss="container">
+<a class="navbar-brand" href="#"><img src="http://nfnlabs.in/images/logo_nav.jpg" width="50"></a>
+<h2 class="well text-center mt-0"> Welcome to NFNLabs</h2>
+</div>
+
+<div class="wrap">
+<div class="bootstrap-iso">
+ <div class="container-fluid">
+  <div class="row">
+   <div class="col-md-6 col-sm-6 col-xs-12">
+    <form class="form-horizontal" method="post" action="/postUserData">
+     <div class="form-group ">
+      <label class="control-label col-sm-2 requiredField" for="sname">
+       Name
+       <span class="asteriskField">
+        *
+       </span>
+      </label>
+      <div class="col-sm-10">
+       <div class="input-group">
+        <div class="input-group-addon">
+         <i class="fa fa-black-tie">
+         </i>
+        </div>
+        <input class="form-control" id="name" name="name" placeholder="Name" type="text"/>
+       </div>
+      </div>
+     </div>
+     <div class="form-group ">
+      <label class="control-label col-sm-2 requiredField" for="sid">
+       ID
+       <span class="asteriskField">
+        *
+       </span>
+      </label>
+      <div class="col-sm-10">
+       <div class="input-group">
+        <div class="input-group-addon">
+         <i class="fa fa-sort-numeric-asc">
+         </i>
+        </div>
+        <input class="form-control" id="studentId" name="studentId" placeholder="ID" type="text"/>
+       </div>
+      </div>
+     </div>
+     <div class="form-group" id="div_sgender">
+      <label class="control-label col-sm-2 requiredField" for="sgender">
+       Gender
+       <span class="asteriskField">
+        *
+       </span>
+      </label>
+      <div class="col-sm-10">
+       <label class="radio-inline">
+        <input name="gender" type="radio" value="Male"/>
+        Male
+       </label>
+       <label class="radio-inline">
+        <input name="gender" type="radio" value="Female"/>
+        Female
+       </label>
+      </div>
+     </div>
+     <div class="form-group ">
+      <label class="control-label col-sm-2 requiredField" for="sdob">
+       D O B
+       <span class="asteriskField">
+        *
+       </span>
+      </label>
+      <div class="col-sm-10">
+       <div class="input-group">
+        <div class="input-group-addon">
+         <i class="fa fa-calendar-o">
+         </i>
+        </div>
+        <input class="form-control" id="dob" name="dob" placeholder="MM/DD/YYYY" type="text"/>
+       </div>
+      </div>
+     </div>
+     <div class="form-group ">
+      <label class="control-label col-sm-2 requiredField" for="clg">
+       College Name
+       <span class="asteriskField">
+        *
+       </span>
+      </label>
+      <div class="col-sm-10">
+       <div class="input-group">
+        <div class="input-group-addon">
+         <i class="fa fa-graduation-cap">
+         </i>
+        </div>
+        <input class="form-control" id="college" name="college" placeholder="College Name" type="text"/>
+       </div>
+      </div>
+     </div>
+     <div class="form-group ">
+      <label class="control-label col-sm-2 requiredField" for="sdep">
+       Department
+       <span class="asteriskField">
+        *
+       </span>
+      </label>
+      <div class="col-sm-10">
+       <select class="select form-control" id="department" name="department">
+        <option value="Select">
+         Select
+        </option>
+        <option value="M C A">
+         M C A
+        </option>
+        <option value="B E">
+         B E
+        </option>
+       </select>
+      </div>
+     </div>
+     <div class="form-group ">
+      <label class="control-label col-sm-2 requiredField" for="tel">
+       Mobile
+       <span class="asteriskField">
+        *
+       </span>
+      </label>
+      <div class="col-sm-10">
+       <div class="input-group">
+        <div class="input-group-addon">
+         <i class="fa fa-phone">
+         </i>
+        </div>
+        <input class="form-control" id="tel" name="tel" placeholder="Mobile" type="text"/>
+       </div>
+      </div>
+     </div>
+     <div class="form-group ">
+      <label class="control-label col-sm-2 requiredField" for="email">
+       Email
+       <span class="asteriskField">
+        *
+       </span>
+      </label>
+      <div class="col-sm-10">
+       <div class="input-group">
+        <div class="input-group-addon">
+         <i class="fa fa-envelope-o">
+         </i>
+        </div>
+        <input class="form-control" id="email" name="email" type="text"/>
+       </div>
+      </div>
+     </div>
+     <div class="form-group ">
+      <label class="control-label col-sm-2 requiredField" for="saddr">
+       Address
+       <span class="asteriskField">
+        *
+       </span>
+      </label>
+      <div class="col-sm-10">
+       <textarea class="form-control" cols="40" id="address" name="address" placeholder="Address" rows="10"></textarea>
+      </div>
+     </div>
+     <div class="form-group">
+      <div class="col-sm-10 col-sm-offset-2">
+       <button class="btn btn-success btn-lg" name="submit" onsubmit="exampage()" ="exampage()" type="submit">
+        Submit
+       </button>
+      </div>
+     </div>
+    </form>
+   </div>
+  </div>
+ </div>
+</div>
+</div>
+<script type="text/javascript">
+  function exampage() {
+    window.location.assign("/");
+  }
+</script>
+</body>

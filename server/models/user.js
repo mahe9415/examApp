@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator")
 var UserSchema = mongoose.Schema({
-name: {
+name:{
 	type:String,
 	required: true,
 	minlength:4 
@@ -15,9 +15,21 @@ department : {
 	type:String,
 	required:true
 },
-mobile:
+gender :{
+  type:String,
+  required:true
+},
+dob :{
+  type:String,
+  required:true
+},
+college :{
+  type:String,
+  required:true
+},
+tel:
 {
-	type:Number,
+	type:String,
   required:true,
 	validate:{
 		validator:(value)=>{
@@ -47,7 +59,11 @@ email: {
       type: String,
       required: true
     }
-  }]
+  }],
+  address:{
+    type:String,
+    required:true
+  }
 
 
 });
