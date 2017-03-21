@@ -27,6 +27,9 @@ category :
 	},
 	d:{
 		type:String
+	},
+	fill_in_the_blank_answer : {
+		type:String
 	}
 });
 

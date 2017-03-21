@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="/css/lib/bootstrap-iso.css" /> 
 	<link rel="stylesheet" href="/css/lib/bootstrap.min.css" />  
 	<link rel="stylesheet" href="/css/lib/fw/css/font-awesome.min.css" />
+  <script src="/js/jquery.min.js"></script>
 	<style type="text/css">
 	.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;} .form-horizontal{display:block;width:100%;margin-left:240px;}
       .mt-0{margin-top: 0;}.well{background-color:white;}.bootstrap-iso .btn{margin-left:415px;border-radius: 2px;}</style>
@@ -40,16 +41,21 @@
       </label>
       <div class="col-sm-10">
        <select class="select form-control" id="question_Type" name="question_Type">
-        <option value="Objective">
+        <option disabled selected>
+         select question type
+        </option>
+        
+        <option value="objective">
          Objective
         </option>
-        <option value="Fill in the blanks">
+        <option value="fill_in_the_blank_answer">
          Fill in the blanks
         </option>
        </select>
       </div>
      </div>
-     <div class="form-group ">
+     <div class="hidden" id="obj1">
+     <div class="form-group">
       <label class="control-label col-sm-2 requiredField" for="a">
        Option A
        <span class="asteriskField">
@@ -93,7 +99,18 @@
        <input class="form-control" id="d" name="d" type="text"/>
       </div>
      </div>
-     <div class="form-group ">
+     </div>
+
+     <div class="hidden" id="fill_in">
+         <div class="form-group">
+         <label class="control-label col-sm-2 requiredField" for="fill">Answer </label>
+             <div class="col-sm-10">
+             <input class="form-control" id="fill" name="fill_in_the_blank_answer" type="text"/>
+             </div>
+         </div>
+     </div>
+
+     <div class="form-group">
       <label class="control-label col-sm-2 requiredField" for="category">
        Question Category
        <span class="asteriskField">
@@ -102,6 +119,9 @@
       </label>
       <div class="col-sm-10">
        <select class="select form-control" id="category" name="category">
+        <option disabled selected>
+         select question category
+        </option>
         <option value="Logical">
          Logical
         </option>
@@ -126,6 +146,17 @@
   </div>
  </div>
 </div>
-
+<script type="text/javascript">
+  $("#question_Type").on('change',function(){
+    if(this.value == 'fill_in_the_blank_answer'){
+    $("#fill_in").attr('class'," ");
+    $("#obj1").attr('class',"hidden");
+    }
+    else if(this.value=='objective'){
+      $("#obj1").attr('class'," ");
+       $("#fill_in").attr('class',"hidden");
+    }
+})
+</script>
 </body>
 </html>

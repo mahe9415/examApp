@@ -19,20 +19,31 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('view engine','hbs');
-hbs.registerPartials(__dirname+'./../views/partials');
+hbs.registerPartials(__dirname+'./../views/');
 
 
 
 //POST QUESTIONS // PostQuestions.html
-app.post(('/postQuestions'),(req,res)=>{
+app.post('/postQuestions',(req,res)=>{
+	console.log(req.body);
+	if(req.body.question_Type == 'objective'){
 	var body=_.pick(req.body,['question','question_Type','category','a','b','c','d']);
 	var question_Id=mongoose.Types.ObjectId();
 	body.question_Id=question_Id;
 	var que = new qa(body);
 	que.save().then((doc)=>{
 		res.send("posted");
-	})
-}
+	})}
+	if(req.body.question_Type == 'fill_in_the_blank_answer')
+	{
+		var body=_.pick(req.body,['question','question_Type','category','fill_in_the_blank_answer']);
+		var question_Id=mongoose.Types.ObjectId();
+		body.question_Id=question_Id;
+		var que = new qa(body);
+		que.save().then((doc)=>{
+			res.send("posted a fill_in_the_blank_answer ");
+		})}
+	}
 );
 
 
@@ -56,7 +67,8 @@ res.json(doc);
 //
 app.post("/result",(req,res)=>{
 	var body=_.pick(req.body,['answer']);
-	body.user="user";
+	console.log(body);
+
 	var res = new result(body);
 	res.save().then((doc)=>{
 		console.log(doc);
