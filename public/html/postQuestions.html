@@ -8,8 +8,10 @@
 	<link rel="stylesheet" href="/css/lib/fw/css/font-awesome.min.css" />
   <script src="/js/jquery.min.js"></script>
 	<style type="text/css">
-	.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;} .form-horizontal{display:block;width:100%;margin-left:240px;}
-      .mt-0{margin-top: 0;}.well{background-color:white;}.bootstrap-iso .btn{margin-left:415px;border-radius: 2px;}</style>
+	.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black;width:100%;}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .form-horizontal{display:block;width:100%;margin-left:240px;}
+      .mt-0{margin-top: 0;}.well{background-color:white;}.bootstrap-iso .btn{border-radius: 2px;}
+      .form-inline{padding: 20px;} .select { width:100%;}  .bootstrap-iso .form-control{width:50%;}
+      </style>
 </head>
 <body>
 <div calss="container">
@@ -19,30 +21,18 @@
 <div class="bootstrap-iso">
  <div class="container-fluid">
   <div class="row">
-   <div class="col-md-6 col-sm-6 col-xs-12">
-    <form class="form-horizontal" method="post" action="/postQuestions">
-     <div class="form-group ">
-      <label class="control-label col-sm-2 requiredField" for="question">
-       Question
-       <span class="asteriskField">
-        *
-       </span>
-      </label>
-      <div class="col-sm-10">
-       <textarea class="form-control" cols="40" id="question" name="question" placeholder="Type the Question" rows="10"></textarea>
-      </div>
+   <div class="">
+    <form class="form-horizontal container" method="post" action="/postQuestions">
+     <div class="form-group container">
+      
+       <textarea class="form-control container"  id="question" name="question" placeholder="Type the Question" rows="10"></textarea>
+    
      </div>
-     <div class="form-group ">
-      <label class="control-label col-sm-2 requiredField" for="question_Type">
-       Question Type
-       <span class="asteriskField">
-        *
-       </span>
-      </label>
-      <div class="col-sm-10">
-       <select class="select form-control" id="question_Type" name="question_Type">
-        <option disabled selected>
-         select question type
+     <div class="form-inline text-center">
+     <div class="form-group container-fluid">
+       <select class="select form-control container" id="question_Type" name="question_Type">
+        <option  disabled selected>
+         Question type
         </option>
         
         <option value="objective">
@@ -52,75 +42,14 @@
          Fill in the blanks
         </option>
        </select>
-      </div>
-     </div>
-     <div class="hidden" id="obj1">
-     <div class="form-group">
-      <label class="control-label col-sm-2 requiredField" for="a">
-       Option A
-       <span class="asteriskField">
-        *
-       </span>
-      </label>
-      <div class="col-sm-10">
-       <input class="form-control" id="a" name="a" type="text"/>
-      </div>
-     </div>
-     <div class="form-group ">
-      <label class="control-label col-sm-2 requiredField" for="b">
-       Option B
-       <span class="asteriskField">
-        *
-       </span>
-      </label>
-      <div class="col-sm-10">
-       <input class="form-control" id="b" name="b" type="text"/>
-      </div>
-     </div>
-     <div class="form-group ">
-      <label class="control-label col-sm-2 requiredField" for="c">
-       Option C
-       <span class="asteriskField">
-        *
-       </span>
-      </label>
-      <div class="col-sm-10">
-       <input class="form-control" id="c" name="c" type="text"/>
-      </div>
-     </div>
-     <div class="form-group ">
-      <label class="control-label col-sm-2 requiredField" for="d">
-       Option D
-       <span class="asteriskField">
-        *
-       </span>
-      </label>
-      <div class="col-sm-10">
-       <input class="form-control" id="d" name="d" type="text"/>
-      </div>
-     </div>
+      
      </div>
 
-     <div class="hidden" id="fill_in">
-         <div class="form-group">
-         <label class="control-label col-sm-2 requiredField" for="fill">Answer </label>
-             <div class="col-sm-10">
-             <input class="form-control" id="fill" name="fill_in_the_blank_answer" type="text"/>
-             </div>
-         </div>
-     </div>
-
-     <div class="form-group">
-      <label class="control-label col-sm-2 requiredField" for="category">
-       Question Category
-       <span class="asteriskField">
-        *
-       </span>
-      </label>
-      <div class="col-sm-10">
-       <select class="select form-control" id="category" name="category">
+     <div class="form-group container-fluid">
+      
+       <select class="select form-control container" id="category" name="category">
         <option disabled selected>
-         select question category
+         Question category
         </option>
         <option value="Logical">
          Logical
@@ -132,14 +61,48 @@
          Programming
         </option>
        </select>
+      
+     </div>
+     
+
+     </div>
+     <div class="hidden" id="obj1">
+     <div class="form-group ">
+      <div class="">
+       <input class="form-control container" placeholder="Option A" id="a" name="a" type="text"/>
       </div>
      </div>
-     <div class="form-group">
-      <div class="col-sm-10 col-sm-offset-2">
+     <div class="form-group ">
+      <div class="">
+       <input class="form-control container" placeholder="Option B" id="b" name="b" type="text"/>
+      </div>
+     </div>
+     <div class="form-group ">
+      <div class="">
+       <input class="form-control container" placeholder="Option C" id="c" name="c" type="text"/>
+      </div>
+     </div>
+     <div class="form-group ">
+      <div class="">
+       <input class="form-control container" placeholder="Option D" id="d" name="d" type="text"/>
+      </div>
+     </div>
+     </div>
+
+     <div class="hidden" id="fill_in">
+         <div class="form-group">
+             <div class="">
+             <input class="form-control container" placeholder="Answer" id="fill" name="fill_in_the_blank_answer" type="text"/>
+             </div>
+         </div>
+     </div>
+
+     <div class="form-group form-btn text-center">
+      
        <button class="btn btn-success btn-lg" name="submit" type="submit">
         Submit
        </button>
-      </div>
+      
      </div>
     </form>
    </div>
@@ -149,11 +112,11 @@
 <script type="text/javascript">
   $("#question_Type").on('change',function(){
     if(this.value == 'fill_in_the_blank_answer'){
-    $("#fill_in").attr('class'," ");
+    $("#fill_in").attr('class',"container");
     $("#obj1").attr('class',"hidden");
     }
     else if(this.value=='objective'){
-      $("#obj1").attr('class'," ");
+      $("#obj1").attr('class',"container");
        $("#fill_in").attr('class',"hidden");
     }
 })

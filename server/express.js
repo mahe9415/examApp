@@ -7,7 +7,6 @@ const {result}= require("./models/result")
 const{MongoClient}= require("./db/mongo");
 const _ = require("lodash");
 
-
 mongoose.Promise=global.Promise;
 
 mongoose.connect('mongodb://localhost:27017/onlineExam');
@@ -25,7 +24,7 @@ hbs.registerPartials(__dirname+'./../views/');
 
 //POST QUESTIONS // PostQuestions.html
 app.post('/postQuestions',(req,res)=>{
-	console.log(req.body);
+	// console.log(req.body);
 	if(req.body.question_Type == 'objective'){
 	var body=_.pick(req.body,['question','question_Type','category','a','b','c','d']);
 	var question_Id=mongoose.Types.ObjectId();
@@ -33,9 +32,11 @@ app.post('/postQuestions',(req,res)=>{
 	var que = new qa(body);
 	que.save().then((doc)=>{
 		res.send("posted");
+		return;
 	})}
+	console.log(req.body.question_Type);
 	if(req.body.question_Type == 'fill_in_the_blank_answer')
-	{
+	{ console.log(req.body.question_Type);
 		var body=_.pick(req.body,['question','question_Type','category','fill_in_the_blank_answer']);
 		var question_Id=mongoose.Types.ObjectId();
 		body.question_Id=question_Id;
@@ -59,19 +60,19 @@ app.get('/check',(req,res)=>{
 
 //send an array of question and answer to browser via ajax call at onload
 app.get("/log",(req,res)=>{
-qa.find({},'question a b c d').then((doc)=>{
+qa.find({}).then((doc)=>{
 // res.render(('exampage.hbs',{que:doc[0].question,a:doc[0].a,b:doc[0].b,c:doc[0].c,d:doc[0].d}),locations);
-res.json(doc);
+res.send(doc);
 })})
 
 //
 app.post("/result",(req,res)=>{
-	var body=_.pick(req.body,['answer']);
-	console.log(body);
+		
+	var body=_.pick(req.body,['answer','question_Id']);
 
+	console.log(body);
 	var res = new result(body);
 	res.save().then((doc)=>{
-		console.log(doc);
 	}).catch((e)=>{
 		console.log(e);
 	})
@@ -97,36 +98,18 @@ user.save().then((doc)=>{
 	res.send("could not save");
 })});
 
+app.get('/exam',(req,res)=>{
+	qa.find()
 
+})
+//question render 
 app.get('/',(req,res)=>{
 	
-	if(i >2){
-	res.render('thankyou.hbs',{cool:" c yu soon"});
-	return;
-}
-	n.collection('mycol').findOne({q:i},(err,result)=>{
-		// q = result.que;
-		// console.log(q);
-	// var q=collection.find({id:10});
-	// Todo.findOneAndRemove({id:15});
-	// var q = Todo.findOne({id:10} ,'name')
-	// console.log(q);
+	// n.collection('mycol').findOne({q:i},(err,result)=>{
  	res.render('exampage.hbs',{que:"ha"});
 
-i++;
-
-
-
-
-
-
-	// Todo.find({"id":10});
-	// console.log(Todo.name);
-	// 	res.render('exampage.hbs',{que:Todo.name})
-
-});
 });
 
 
-app.listen('3000');
+app.listen('3000','0.0.0.0');
 

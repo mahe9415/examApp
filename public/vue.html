@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/lib/bootstrap-iso.css" />
+    <link rel="stylesheet" href="/css/lib/fw/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/css/lib/bootstrap.min.css" />
+    <style>
+    .list a {
+        text-decoration: none;
+        color: white;
+    }
+    
+    .navbar {
+        font-size: 20px;
+        width: 100%;
+    }
+    
+    .col-md-2,
+    .col-lg-2,
+    .col-sm-2 {
+        background-color: gray;
+        height: 650px;
+        color: white;
+        font-size: 20px;
+    }
+    
+    .col-md-10,
+    .col-lg-10,
+    .col-sm-10 {
+        background-color: #F1F1F1;
+        height: 650px;
+    }
+    
+    .list {
+        padding: 20px;
+        list-style: none;
+    }
+    /*.qt{
+			background-color: white;
+			width:80%;
+		}
+		.qt td , .qt th {
+			padding:20px;
+		}*/
+    
+    .row {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+    
+    .navbar-right li {
+        padding: 10px;
+    }
+    
+    .navbar-right {
+        padding-right: 4px;
+        padding-top: 19px;
+    }
+    
+    .btn-success {
+        background-color: #27AE60;
+    }
+    
+    .btn-success,
+    .btn-default {
+        width: 100px;
+        border: 0.5px solid;
+    }
+    /*.container{
+			border:1px solid black;
+			
+		}*/
+    
+    .radio {
+        position: relative;
+        display: block;
+        margin-top: 0px;
+        /* margin-bottom: 6px; */
+    }
+    
+    .container-fluid {
+        padding-right: 0px;
+        padding-left: 0px;
+        margin-right: auto;
+        margin-left: auto;
+        padding-bottom: 0px;
+    }
+    
+    .well {
+        min-height: 6px;
+        padding: 23px;
+        margin-bottom: 0px;
+        background-color: white;
+        border-radius: 0px;
+        border: 1px solid gray;
+    }
+    
+    .qaa {
+        padding: 0px;
+        margin: 50px;
+        background-color: white;
+    }
+    
+    label.btn span {
+        font-size: 1.5em;
+    }
+    
+    label input[type="radio"] ~ i.fa.fa-circle-o {
+        color: #c8c8c8;
+        display: inline;
+    }
+    
+    label input[type="radio"] ~ i.fa.fa-check-circle {
+        display: none;
+    }
+    
+    label input[type="radio"]:checked ~ i.fa.fa-circle-o {
+        display: none;
+    }
+    
+    label input[type="radio"]:checked ~ i.fa.fa-check-circle {
+        color: yellowgreen;
+        display: inline;
+    }
+    
+    label:hover input[type="radio"] ~ i.fa {
+        color: yellowgreen;
+    }
+    
+    div[data-toggle="buttons"] label.active {
+        color: yellowgreen;
+    }
+    
+    div[data-toggle="buttons"] label:hover {
+        color: ;
+    }
+    
+    div[data-toggle="buttons"] label:active,
+    div[data-toggle="buttons"] label.active {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+    
+    .radio input[type="radio"] {
+        display: none;
+    }
+    
+    #fill {
+        border: 1px solid gray;
+        border-radius: 0px;
+        width: 100%;
+        padding: 4%;
+    }
+    </style>
+    <script type="text/javascript">
+    </script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#"><img src="http://nfnlabs.in/images/logo_nav.jpg" width="45"></a>
+        </div>
+        <p class="navbar-text" style="color: yellowgreen; padding-top: 30px; margin:0;">NFNLabs</p>
+        <h2 class="navbar-text" style="position:absolute;top:11%;left:40%;">OnlineTest</h2>
+        <h3 class="navbar-text" style="position:absolute;top:11%;left:90%;" id="clock"></h3>
+    </nav>
+    <div class="col-md-2 col-lg-2 col-sm-2">
+        <ul class="list">
+            <li class="fa fa-odnoklassniki-square"> <a href="/html/profile">Profile</a></li>
+            <br>
+            <br>
+            <li class="fa fa-wpforms"> <a href="">Instruction</a></li>
+            <br>
+            <br>
+            <br>
+            <h3>TEST</h3>
+            <br>
+            <li class="fa fa-wpforms"> <a href="/">Logical</a></li>
+            <br>
+            <br>
+            <li class="fa fa-wpforms"> <a href="">Resoning</a></li>
+            <br>
+            <br>
+            <li class="fa fa-wpforms"> <a href="">Program</a></li>
+            <br>
+            <br>
+        </ul>
+    </div>
+    <div id="target">
+        <div class="col-md-10 col-lg-10 col-sm-10">
+            <div class="qaa">
+                <form id="form">
+                    <div v-for="(array,index) in questionset">
+                        <div>
+                            <question :que="array.question" v-if="array.question"></question>
+                        </div>
+                        <option-box :option="array.a" v-if="array.a"> </option-box>
+                        <option-box :option="array.b" v-if="array.b"></option-box>
+                        <option-box :option="array.c" v-if="array.c"></option-box>
+                        <option-box :option="array.d" v-if="array.d"></option-box>
+                        <text-box v-else></text-box>
+                        <ul class="nav navbar-nav navbar-right container-fluid">
+                            <li>
+                                <button id="previous" v-if="b" type="button" class="btn btn-default btn-block btn-lg" v-on:click="prev" id="prevb"><b>Previous</b></button>
+                            </li>
+                            <li>
+                                <button type="button" class="btn btn-success btn-block btn-lg" v-on:click="next1"> <b>Next </b></button>
+                            </li>
+                        </ul>
+                    </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="/js/exam-vue.js"></script>
+</body>
+
+</html>

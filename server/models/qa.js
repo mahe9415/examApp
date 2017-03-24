@@ -5,7 +5,7 @@ question :
 	type:String,
 },
 question_Id:{
-	type: mongoose.Schema.ObjectId
+	type:String
 },
 question_Type :{
 	type: String,
