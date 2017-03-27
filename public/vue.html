@@ -201,17 +201,17 @@
                         <div>
                             <question :que="array.question" v-if="array.question"></question>
                         </div>
-                        <option-box :option="array.a" v-if="array.a"> </option-box>
-                        <option-box :option="array.b" v-if="array.b"></option-box>
-                        <option-box :option="array.c" v-if="array.c"></option-box>
-                        <option-box :option="array.d" v-if="array.d"></option-box>
+                        <optiona-box :option="array.a" v-if="array.a"> </optiona-box>
+                        <optionb-box :option="array.b" v-if="array.b"> </optionb-box>
+                        <optionc-box :option="array.c" v-if="array.c"> </optionc-box>
+                        <optiond-box :option="array.d" v-if="array.d"> </optiond-box>
                         <text-box v-else></text-box>
                         <ul class="nav navbar-nav navbar-right container-fluid">
                             <li>
-                                <button id="previous" v-if="b" type="button" class="btn btn-default btn-block btn-lg" v-on:click="prev" id="prevb"><b>Previous</b></button>
+                                <button id="previous" v-if="flag" type="button" class="btn btn-default btn-block btn-lg" v-on:click="onPrev" id="prevb"><b>Previous</b></button>
                             </li>
                             <li>
-                                <button type="button" class="btn btn-success btn-block btn-lg" v-on:click="next1"> <b>Next </b></button>
+                                <button type="button" class="btn btn-success btn-block btn-lg" v-on:click="onNext"> <b>Next </b></button>
                             </li>
                         </ul>
                     </div>

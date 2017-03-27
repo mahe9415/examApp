@@ -66,13 +66,13 @@ res.send(doc);
 })})
 
 //
-app.post("/result",(req,res)=>{
-		
+app.post("/result",(req,res)=>{	
+	// console.log(req);
 	var body=_.pick(req.body,['answer','question_Id']);
-
 	console.log(body);
-	var res = new result(body);
-	res.save().then((doc)=>{
+	var ans = new result(body);
+	ans.save().then((doc)=>{
+		 res.send();
 	}).catch((e)=>{
 		console.log(e);
 	})
