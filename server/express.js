@@ -6,6 +6,8 @@ const {qa} = require("./models/qa");
 const {result}= require("./models/result")
 const{MongoClient}= require("./db/mongo");
 const _ = require("lodash");
+var{authendicate} = require('./middleware/authendicate')
+
 
 mongoose.Promise=global.Promise;
 
@@ -65,8 +67,9 @@ qa.find({}).then((doc)=>{
 res.send(doc);
 })})
 
+
 //
-app.post("/result",(req,res)=>{	
+app.post("/result",authendicate,(req,res)=>{	
 	// console.log(req);
 	var body=_.pick(req.body,['answer','question_Id']);
 	console.log(body);
@@ -77,31 +80,31 @@ app.post("/result",(req,res)=>{
 		console.log(e);
 	})
 })
-
-
+app.get('/checkToken',authendicate,(req,res)=>{
+	User.find({}).then((doc)=>{
+		res.send(doc);
+	})
+})
 
 //POST USER DATA //register.html
 app.post('/postUserData',(req,res)=>{
 var user = new User(req.body);
-user.save().then((doc)=>{
-	if(!doc)
-	{
-		res.status(400).send();
-	}
-	qa.find({},'question a b c d').then((doc)=>{
-	res.render('exampage.hbs',{que:doc[0].question,a:doc[0].a,b:doc[0].b,c:doc[0].c,d:doc[0].d});
+user.save().then(()=>{
+		return user.generateAuthToken();
+	}).then((token)=>{
+		res.set('x-auth',token).render('vue.hbs');
 
-}).catch((e)=>{
-	res.send(e);
-	return Promise.reject(e);
-})}).catch((e)=>{
-	res.send("could not save");
-})});
+	}).catch((e)=>{
+		res.status(400).send();
+	})
+	});
+
 
 app.get('/exam',(req,res)=>{
-	qa.find()
-
+	console.log(req);
 })
+
+
 //question render 
 app.get('/',(req,res)=>{
 	
