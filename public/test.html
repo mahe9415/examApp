@@ -15,6 +15,7 @@
         color: white;
     }
     
+    
     .navbar {
         font-size: 20px;
         width: 100%;
@@ -27,6 +28,7 @@
         height: 650px;
         color: white;
         font-size: 20px;
+        
     }
     
     .col-md-10,
@@ -158,14 +160,12 @@
         padding: 4%;
     }
     </style>
-    <script type="text/javascript">
-    </script>
 </head>
 
 <body>
     <nav class="navbar">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#"><img src="http://nfnlabs.in/images/logo_nav.jpg" width="45"></a>
+            <a class="navbar-brand" href="#"><img src="/logo.jpg" width="45"></a>
         </div>
         <p class="navbar-text" style="color: yellowgreen; padding-top: 30px; margin:0;">NFNLabs</p>
         <h2 class="navbar-text" style="position:absolute;top:11%;left:40%;">OnlineTest</h2>
@@ -211,7 +211,7 @@
                                 <button id="previous" v-if="flag" type="button" class="btn btn-default btn-block btn-lg" v-on:click="onPrev" id="prevb"><b>Previous</b></button>
                             </li>
                             <li>
-                                <button type="button" class="btn btn-success btn-block btn-lg" v-on:click="onNext"> <b>Next </b></button>
+                                <button id="next" type="button" class="btn btn-success btn-block btn-lg" v-on:click="onNext"> <b>Next </b></button>
                             </li>
                         </ul>
                     </div>
@@ -220,9 +220,8 @@
         </div>
     </div>
 </body>
-
 </html>
-<script src="/js/exam-vue.js"></script>
+<script src="/js/test.js"></script>
 </body>
 
 </html>

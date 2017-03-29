@@ -1,10 +1,10 @@
 var express = require('express');
-var cookieParser = require('cookie-parser');
+// var cookieParser = require('cookie-parser');
 var session = require('express-session');
 
 var app = express();
 
-app.use(cookieParser());
+// app.use(cookieParser());
 app.use(session({secret: "Shh, its a secret!"}));
 
 app.get('/', function(req, res){
