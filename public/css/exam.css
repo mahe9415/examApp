@@ -1,0 +1,151 @@
+.list a {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar {
+    font-size: 20px;
+    width: 100%;
+}
+
+.col-md-2,
+.col-lg-2,
+.col-sm-2 {
+    background-color: gray;
+    height: 650px;
+    color: white;
+    font-size: 20px;
+}
+
+.col-md-10,
+.col-lg-10,
+.col-sm-10 {
+    background-color: #F1F1F1;
+    height: 650px;
+}
+
+.list {
+    padding: 20px;
+    list-style: none;
+}
+
+
+/*.qt{
+            background-color: white;
+            width:80%;
+        }
+        .qt td , .qt th {
+            padding:20px;
+        }*/
+
+.row {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.navbar-right li {
+    padding: 10px;
+}
+
+.navbar-right {
+    padding-right: 4px;
+    padding-top: 19px;
+}
+
+.btn-success {
+    background-color: #27AE60;
+}
+
+.btn-success,
+.btn-default {
+    width: 100px;
+    border: 0.5px solid;
+}
+
+
+/*.container{
+            border:1px solid black;
+            
+        }*/
+
+.radio {
+    position: relative;
+    display: block;
+    margin-top: 0px;
+    /* margin-bottom: 6px; */
+}
+
+.container-fluid {
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-bottom: 0px;
+}
+
+.well {
+    min-height: 6px;
+    padding: 23px;
+    margin-bottom: 0px;
+    background-color: white;
+    border-radius: 0px;
+    border: 1px solid gray;
+}
+
+.qaa {
+    padding: 0px;
+    margin: 50px;
+    background-color: white;
+}
+
+label.btn span {
+    font-size: 1.5em;
+}
+
+label input[type="radio"] ~ i.fa.fa-circle-o {
+    color: #c8c8c8;
+    display: inline;
+}
+
+label input[type="radio"] ~ i.fa.fa-check-circle {
+    display: none;
+}
+
+label input[type="radio"]:checked ~ i.fa.fa-circle-o {
+    display: none;
+}
+
+label input[type="radio"]:checked ~ i.fa.fa-check-circle {
+    color: yellowgreen;
+    display: inline;
+}
+
+label:hover input[type="radio"] ~ i.fa {
+    color: yellowgreen;
+}
+
+div[data-toggle="buttons"] label.active {
+    color: yellowgreen;
+}
+
+div[data-toggle="buttons"] label:hover {
+    color: ;
+}
+
+div[data-toggle="buttons"] label:active,
+div[data-toggle="buttons"] label.active {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.radio input[type="radio"] {
+    display: none;
+}
+
+#fill {
+    border: 1px solid gray;
+    border-radius: 0px;
+    width: 100%;
+    padding: 4%;
+}

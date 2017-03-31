@@ -1,5 +1,9 @@
 var jq = $.noConflict();
 
+jq(document).ready(function() {
+    alert("dc");
+
+})
 
 Vue.component('optiona-box', {
     props: ['option'],
@@ -41,83 +45,72 @@ var vm = new Vue({
         this.fetchQuestions();
     },
     methods: {
-        onNext: function() {
-            if (vm.questionArray[vm.index].question_Type == 'fill_in_the_blank_answer') {
-                vm.answer[vm.index] = jq("#fill").val();
-                // console.log(vm.answer[vm.index] + " fill " + vm.index);
-            } else {
-                vm.answer[vm.index] = jq('input[name="ans"]:checked').val();
-                // console.log(vm.answer[vm.index] + " check " + vm.index);
-            }
-            this.setAns();
-            this.postAns();
-            vm.index = vm.index + 1;
-
-            if (vm.index > (vm.questionArray.length) - 1) {
-                alert("thankyou");
-                return;
-            }
-
-            if (vm.index > 0) {
-                this.question = [];
-                this.question.push(vm.questionArray[vm.index]);
-                vm.flag = true;
-                return;
-            }
-        },
         fetchQuestions: function() {
             jq.get('/log', function(doc) {
                 vm.questionArray = doc;
                 vm.question.push(vm.questionArray[vm.index]);
             })
         },
-        onPrev: function() {
-            this.question = [];
-            vm.index = vm.index - 1;
-            if (vm.index == 0) {
-                vm.flag = false;
-            } else {
-                vm.flag = true;
-            }
-            this.question.push(vm.questionArray[vm.index]);
-            this.setAns();
-            return;
-        },
-        setAns: function() {
-            setTimeout(function() {
-                if (vm.questionArray[vm.index].question_Type == 'objective') {
-                    jq('input[name=ans][value=' + vm.answer[vm.index] + ']').attr('checked', 'checked');
-                } else if (vm.questionArray[vm.index].question_Type == 'fill_in_the_blank_answer') {
-                    jq('#fill').val(vm.answer[vm.index]);
+        onNext: function() {
+            debugger;
+            if(vm.setAns(vm.index+1)){
+            if (vm.index != 0) { vm.flag = true; }
+            vm.question = [];
+            var answer = jq('input[name="ans"]:checked').val();
+            if ((vm.questionArray[vm.index].question_Type == 'objective') && (answer !== undefined)) {
+                if (vm.questionArray[vm.index].answer != answer) {
+                    vm.questionArray[vm.index].answer = answer;
                 }
-                return;
-            }, 0000);
+            } else if (vm.questionArray[vm.index].question_Type == 'fill_in_the_blank_answer') {
+                answer = jq("#fill").val();
+                if (answer == '') { answer = undefined }
+                vm.questionArray[vm.index].answer = answer;
+            }
+            this.postAns(vm.questionArray[vm.index].answer, vm.questionArray[vm.index].question_Id)
+            vm.index++;
+            console.log(vm.index);
+            this.question.push(vm.questionArray[vm.index]);
+
+        }},
+        onPrev: function() {
+            debugger;
+            vm.index = vm.index - 2;
+            console.log(vm.index);
+            if (vm.index < 0) {
+                vm.index=0;
+                vm.question.push(vm.questionArray[vm.index]);
+            }
+            vm.onNext();
         },
-        postAns: function() {
-            if (vm.answer[vm.index] == undefined || vm.answer[vm.index] == '') {
-                // console.log("msg");
-                return;
+        postAns: function(ans, id) {
+            if (ans == undefined) {
+                return true;
             }
             jq.ajax({
+                headers: {
+                    'x-auth': document.cookie.split('=')[1]
+                },
                 method: 'POST',
                 url: '/result',
-                data: { "answer": vm.answer[vm.index], "question_Id": vm.questionArray[vm.index].question_Id }
+                data: { "answer": ans, "question_Id": id }
             })
-            jq('input[name=ans]').prop('checked', false);
-            jq('#fill').val(undefined);
+            jq("input[name=ans]").prop('checked', false);
+            jq("#fill").val(undefined);
+            return true;
         },
-        check: function() {
-            alert(cool);
+        setAns: function(index) {
+
+                if (vm.questionArray[index].hasOwnProperty('answer')) {
+                    if (vm.questionArray[index].question_Type == 'objective') {
+                        jq("input[name=ans][value=" + vm.questionArray[index].answer + "]").prop('checked', true);
+                    } else if (vm.questionArray[index].question_Type == 'fill_in_the_blank_answer') {
+                        jq("#fill").val(vm.questionArray[index].answer);
+                    }
+                }
+                return true;
+                // else if(!vm.questionArray[index-1].hasOwnProperty('answer')){console.log("msg")}
+            }
+
         }
-
     }
-
-});
-
-jq(document).ready(function() {
-    jq("input").on('change', function() {
-        console.log("changed");
-        vm.postAns();
-    })
-    console.log("msg");
-})
+);

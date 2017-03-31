@@ -63,23 +63,17 @@ app.get('/check',(req, res) => {
         res.send(e);
     })
 })
-
-
 //send an array of question and answer to browser via ajax call at onload
 app.get("/log", (req, res) => {
     qa.find({}).then((doc) => {
-        // res.render(('exampage.hbs',{que:doc[0].question,a:doc[0].a,b:doc[0].b,c:doc[0].c,d:doc[0].d}),locations);
         res.send(doc);
     })
 })
-
-
 //
 app.post("/result",authendicate,(req, res) => {
     var body = _.pick(req.body, ['answer', 'question_Id']);
     var user=req.headers['x-auth'];
     body.user=user;
-    console.log(body);
     var ans = new result(body);
     ans.save().then((doc) => {
         res.send();
@@ -92,7 +86,6 @@ app.get('/checkToken', authendicate, (req, res) => {
         res.send(doc);
     })
 })
-
 //POST USER DATA //register.html
 app.post('/postUserData', (req, res) => {
     var user = new User(req.body);
@@ -106,8 +99,6 @@ app.post('/postUserData', (req, res) => {
         res.status(400).send(e);
     })
 });
-
-
 app.get('/login', (req, res) => {
     sess = req.session;
     if (sess.auth) {

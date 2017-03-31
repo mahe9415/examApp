@@ -31,7 +31,7 @@ var vm = new Vue({
         return {
             question: [],
             questionArray: [],
-            answer: [],
+            answer:[],
             index: 0,
             flag: false
         }
@@ -41,11 +41,11 @@ var vm = new Vue({
     },
     methods: {
         onNext: function() {
-
             if (vm.questionArray[vm.index].question_Type == 'fill_in_the_blank_answer') {
                 vm.answer[vm.index] = jq("#fill").val();
                 console.log(vm.answer[vm.index] + " fill " + vm.index);
             } else {
+                
                 vm.answer[vm.index] = jq('input[name="ans"]:checked').val();
                 console.log(vm.answer[vm.index] + " check " + vm.index);
             }
@@ -72,7 +72,7 @@ var vm = new Vue({
             })
         },
         onPrev: function() {
-            vm.index = vm.index - 1;
+            vm.index = vm.index-1;
             if (vm.index == 0) {
                 vm.flag = false;
             } else {
@@ -85,16 +85,14 @@ var vm = new Vue({
             return;
         },
         setAns: function() {
+
             setTimeout(function() {
-
+                console.log(vm.index);
                 if (vm.questionArray[vm.index].question_Type == 'objective') {
-
                     jq("input[name=ans][value=" + vm.answer[vm.index] + "]").attr('checked', 'checked');
                 } else if (vm.questionArray[vm.index].question_Type == 'fill_in_the_blank_answer') {
                     jq("#fill").val(vm.answer[vm.index]);
-
                 }
-
                 return;
             }, 0000);
         },
@@ -111,15 +109,8 @@ var vm = new Vue({
                 url: '/result',
                 data: { "answer": vm.answer[vm.index], "question_Id": vm.questionArray[vm.index].question_Id }
             })
-
-
-            // setRequestHeader('x-auth','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OGRhMTk4ZGE3Yjc5NTZkYjc5YzZlMGMiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNDkwNjg4Mzk4fQ.3jpUOQwqq7694xJfxRfelWSq1djtrspknpSeryGzsGM');
-            // jq.post('/result',{"answer":vm.answer[vm.index],"question_Id":vm.questionArray[vm.index].question_Id});
-            // vm.questionArray[vm.index].answer=vm.answer[vm.index];
             jq("input[name=ans]").prop('checked', false);
             jq("#fill").val(undefined);
-
-
         }
 
     }
