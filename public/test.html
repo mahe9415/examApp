@@ -4,7 +4,7 @@
 <head>
     <title></title>
     <script src="/js/vue@2.2.6.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/lib/bootstrap-iso.css" />
     <link rel="stylesheet" href="/css/lib/fw/css/font-awesome.min.css" />
@@ -46,7 +46,7 @@
     <div id="target">
         <div class="col-md-10 col-lg-10 col-sm-10">
             <div class="qaa">
-                <form id="form">
+                <form id="form" v-on:submit.prevent="onSubmit">
                     <div v-for="(array,index) in question">
                         <div>
                             <question :que="array.question" v-if="array.question"></question>
@@ -70,8 +70,9 @@
         </div>
     </div>
 </body>
+
 </html>
-<script src="/js/test.js"></script>
+<script src="/js/test2.js"></script>
 </body>
 
 </html>

@@ -31,7 +31,6 @@ var vm = new Vue({
         return {
             question: [],
             questionArray: [],
-            answer: [],
             index: 0,
             flag: false
         }

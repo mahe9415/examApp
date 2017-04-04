@@ -53,9 +53,14 @@ var vm = new Vue({
         },
         onNext: function() {
             debugger;
-            if(vm.setAns(vm.index+1)){
-            if (vm.index != 0) { vm.flag = true; }
-            vm.question = [];
+            if (vm.questionArray[vm.index].hasOwnProperty('answer')) {
+                    if (vm.questionArray[vm.index].question_Type == 'objective') {
+                        jq("input[name=ans][value=" + vm.questionArray[vm.index].answer + "]").prop('checked', true);
+                    } else if (vm.questionArray[vm.index].question_Type == 'fill_in_the_blank_answer') {
+                        jq("#fill").val(vm.questionArray[vm.index].answer);
+                    }
+                }
+            
             var answer = jq('input[name="ans"]:checked').val();
             if ((vm.questionArray[vm.index].question_Type == 'objective') && (answer !== undefined)) {
                 if (vm.questionArray[vm.index].answer != answer) {
@@ -66,15 +71,14 @@ var vm = new Vue({
                 if (answer == '') { answer = undefined }
                 vm.questionArray[vm.index].answer = answer;
             }
-            this.postAns(vm.questionArray[vm.index].answer, vm.questionArray[vm.index].question_Id)
+            this.postAns(vm.questionArray[vm.index].answer, vm.questionArray[vm.index].question_Id);
             vm.index++;
-            console.log(vm.index);
+            vm.question = [];
             this.question.push(vm.questionArray[vm.index]);
-
-        }},
+        },
         onPrev: function() {
-            debugger;
-            vm.index = vm.index - 2;
+            debugger
+            vm.index = vm.index - 1;
             console.log(vm.index);
             if (vm.index < 0) {
                 vm.index=0;

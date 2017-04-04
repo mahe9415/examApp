@@ -19,7 +19,7 @@
         </div>
         <p class="navbar-text" style="color: yellowgreen; padding-top: 30px; margin:0;">NFNLabs</p>
         <h2 class="navbar-text" style="position:absolute;top:11%;left:40%;">OnlineTest</h2>
-        <h3 class="navbar-text" style="position:absolute;top:11%;left:90%;" id="clock">{{user}}</h3>
+        <h3 class="navbar-text" style="position:absolute;top:11%;left:82%;" id="clock">{{user}}</h3>
     </nav>
     <div class="col-md-2 col-lg-2 col-sm-2">
         <ul class="list">
@@ -46,7 +46,7 @@
     <div id="target">
         <div class="col-md-10 col-lg-10 col-sm-10">
             <div class="qaa">
-                <form id="form">
+                <form id="form" v-on:submit.prevent="onSubmit">
                     <div v-for="(array,index) in question">
                         <div>
                             <question :que="array.question" v-if="array.question"></question>

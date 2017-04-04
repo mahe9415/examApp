@@ -41,6 +41,7 @@ app.post('/postQuestions', (req, res) => {
             return;
         })
     }
+    
     // console.log(req.body.question_Type);
     if (req.body.question_Type == 'fill_in_the_blank_answer') {
         console.log(req.body.question_Type);

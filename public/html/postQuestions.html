@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="/css/lib/bootstrap.min.css" />  
 	<link rel="stylesheet" href="/css/lib/fw/css/font-awesome.min.css" />
   <script src="/js/jquery.min.js"></script>
+  <script src="/js/vue@2.2.6.js"></script>
 	<style type="text/css">
 	.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black;width:100%;}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .form-horizontal{display:block;width:100%;margin-left:240px;}
       .mt-0{margin-top: 0;}.well{background-color:white;}.bootstrap-iso .btn{border-radius: 2px;}
@@ -14,7 +15,7 @@
       </style>
 </head>
 <body>
-<div calss="container">
+<div calss="container ">
 <a class="navbar-brand" href="#"><img src="http://nfnlabs.in/images/logo_nav.jpg" width="50"></a>
 <h2 class="well text-center mt-0"> Welcome to NFNLabs</h2>
 </div>
@@ -31,7 +32,7 @@
      <div class="form-inline text-center">
      <div class="form-group container-fluid">
        <select class="select form-control container" id="question_Type" name="question_Type">
-        <option  disabled selected>
+        <option value="general" selected>
          Question type
         </option>
         
@@ -42,7 +43,6 @@
          Fill in the blanks
         </option>
        </select>
-      
      </div>
 
      <div class="form-group container-fluid">
@@ -102,7 +102,6 @@
        <button class="btn btn-success btn-lg" name="submit" type="submit">
         Submit
        </button>
-      
      </div>
     </form>
    </div>
