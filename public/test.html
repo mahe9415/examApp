@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <script src="/js/vue@2.2.6.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/lib/bootstrap-iso.css" />
+    <link rel="stylesheet" href="/css/lib/fw/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/css/lib/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/exam.css" />
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#"><img src="/logo.jpg" width="45"></a>
+        </div>
+        <p class="navbar-text" style="color: yellowgreen; padding-top: 30px; margin:0;">NFNLabs</p>
+        <h2 class="navbar-text" style="position:absolute;top:11%;left:40%;">OnlineTest</h2>
+        <h3 class="navbar-text" style="position:absolute;top:11%;left:90%;" id="clock">{{user}}</h3>
+    </nav>
+    <div class="col-md-2 col-lg-2 col-sm-2">
+        <ul class="list">
+            <li class="fa fa-odnoklassniki-square"> <a href="/html/profile">Profile</a></li>
+            <br>
+            <br>
+            <li class="fa fa-wpforms"> <a href="">Instruction</a></li>
+            <br>
+            <br>
+            <br>
+            <h3>TEST</h3>
+            <br>
+            <li class="fa fa-wpforms"> <a href="/">Logical</a></li>
+            <br>
+            <br>
+            <li class="fa fa-wpforms"> <a href="">Resoning</a></li>
+            <br>
+            <br>
+            <li class="fa fa-wpforms"> <a href="">Program</a></li>
+            <br>
+            <br>
+        </ul>
+    </div>
+    <div id="target">
+        <div class="col-md-10 col-lg-10 col-sm-10">
+            <div class="qaa">
+                <form id="form" v-on:submit.prevent="onSubmit">
+                    <div v-for="(array,index) in question">
+                        <div>
+                            <question :que="array.question" v-if="array.question"></question>
+                        </div>
+                        <optiona-box :option="array.a" v-if="array.a"> </optiona-box>
+                        <optionb-box :option="array.b" v-if="array.b"> </optionb-box>
+                        <optionc-box :option="array.c" v-if="array.c"> </optionc-box>
+                        <optiond-box :option="array.d" v-if="array.d"> </optiond-box>
+                        <text-box v-else></text-box>
+                        <ul class="nav navbar-nav navbar-right container-fluid">
+                            <li>
+                                <button id="previous" v-if="flag" type="button" class="btn btn-default btn-block btn-lg" v-on:click="onPrev" id="prevb"><b>Previous</b></button>
+                            </li>
+                            <li>
+                                <button id="next" type="button" class="btn btn-success btn-block btn-lg" v-on:click="onNext"> <b>Next </b></button>
+                            </li>
+                        </ul>
+                    </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="/js/test2.js"></script>
+</body>
+
+</html>
