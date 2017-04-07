@@ -1,6 +1,4 @@
 var jq = $.noConflict();
-
-
 Vue.component('optiona-box', {
     props: ['option'],
     template: '<div class="radio well btn-group btn-group" data-toggle="buttons" ><label><input type="radio" value="a" name="ans"  id="a" class="rbtn"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle fa-2x"></i><span id="a" style="font-size:20px; padding-left:30px;"></span>{{option}}</label></div>'
@@ -17,7 +15,6 @@ Vue.component('optiond-box', {
     props: ['option'],
     template: '<div class="radio well btn-group btn-group" data-toggle="buttons" ><label><input type="radio" value="d" name="ans"  id="d" class="rbtn"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle fa-2x"></i><span id="a" style="font-size:20px; padding-left:30px;"></span>{{option}}</label></div>'
 });
-
 Vue.component('question', {
     props: ['que'],
     template: '<div class="well"><small id="small"> Question</small> <small id="qtype"></small><br><h4 id="question1" style="font-size:25px;">{{que}}</h4></div>'
@@ -42,43 +39,59 @@ var vm = new Vue({
         fetchQuestions: function() {
             jq.get('/log', function(doc) {
                 vm.questionArray = doc;
+                console.log(doc);
                 vm.question.push(vm.questionArray[vm.index]);
             });
-
         },
         onNext: function() {
-
-            if (vm.index == (vm.questionArray.length)-1) {
+            if (vm.index == (vm.questionArray.length) - 1) {
                 this.getUserAns(vm.index);
-                var length=vm.questionArray.length;
+                var length = vm.questionArray.length;
                 var count;
                 console.log(length);
-                debugger;
-                for(count=0;count<=length;count++){
-                    vm.postAns(vm.questionArray[count].answer,vm.questionArray[count].question_Id);    
-            }
+                var arr = vm.questionArray.map(function(item) {
+                    var answer = item.answer;
+                    var question_Id = item.question_Id;
+                    return { "userAnswer": answer, "question_Id": question_Id, "ans_validate": "" };
+                })
+                console.log(arr);
+                this.postAns(arr);
+                
                 return;
             }
             vm.flag = true;
-            this.getUserAns(vm.index);
+            vm.getUserAns(vm.index);
             vm.index++;
-            this.clearAns();
-            this.displayQuestion(vm.index);
-            setTimeout(function() { vm.previousAns(vm.index) }, 0000);
-            
+            var promise = new Promise(function(resolve, reject) {
+                vm.displayQuestion(vm.index);
+                resolve();
+            });
+            promise.then(function() {
+                vm.clearAns();
+                vm.previousAns(vm.index)
+            })
+
+            // setTimeout(function() {  }, 500);
+
         },
         displayQuestion: function(index) {
             vm.question = [];
             vm.question.push(vm.questionArray[index]);
-
         },
         onPrev: function() {
             this.getUserAns(vm.index);
             this.clearAns();
             vm.index--;
             if (vm.index == 0) { vm.flag = false };
-            this.displayQuestion(vm.index);
-            setTimeout(function() { vm.previousAns(vm.index) }, 0000);
+            var promise = new Promise(function(resolve, reject) {
+                vm.displayQuestion(vm.index);
+                resolve();
+            });
+            promise.then(function() {
+                    vm.previousAns(vm.index)
+                })
+                // this.displayQuestion(vm.index);
+                // setTimeout(function() { vm.previousAns(vm.index) },500);
         },
         clearAns: function() {
             jq("input[name=ans]").prop('checked', false);
@@ -101,18 +114,37 @@ var vm = new Vue({
                 console.log(vm.questionArray[index].answer);
             }
         },
-        postAns: function(ans, id) {
-            if (ans == undefined) {
-                return;
-            }
+        postAns: function(ans) {
             jq.ajax({
                 headers: {
                     'x-auth': document.cookie.split('=')[1]
                 },
                 method: 'POST',
                 url: '/result',
-                data: { "answer": ans, "question_Id": id }
+                data: { "answer": ans },
+                success:function(result){
+                    window.location.pathname='/displayResult';
+                }
+
             })
         }
     }
+
 });
+
+jq(document).ready(function() {
+    var mins = 0;
+    var sec = 0;
+    var displayClock = jq("#clock");
+    setInterval(function() {
+        if (document.hidden) {
+            alert("logged out");
+            console.log("hg");
+        }
+        if (sec == 59) {
+            mins++;
+            sec = 0;
+        }
+        jq("#clock").text(mins + ":" + sec++)
+    }, 1000);
+})

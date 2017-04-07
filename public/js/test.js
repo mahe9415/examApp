@@ -48,6 +48,7 @@ var vm = new Vue({
         fetchQuestions: function() {
             jq.get('/log', function(doc) {
                 vm.questionArray = doc;
+                console.log(doc)
                 vm.question.push(vm.questionArray[vm.index]);
             })
         },

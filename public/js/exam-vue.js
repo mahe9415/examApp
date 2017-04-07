@@ -23,7 +23,7 @@ Vue.component('question', {
     template: '<div class="well"><small id="small"> Question</small> <small id="qtype"></small><br><h4 id="question1" style="font-size:25px;">{{que}}</h4></div>'
 });
 Vue.component('text-box', {
-    template: '<input type="text" id="fill" name="fill_in_the_blank_answer" autocomplete="off">'
+    template: '<input type="text" id="fill" name="ans" autocomplete="off">'
 })
 var vm = new Vue({
     el: '#target',

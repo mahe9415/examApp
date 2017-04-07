@@ -12,6 +12,50 @@
 	.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black;width:100%;}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .form-horizontal{display:block;width:100%;margin-left:240px;}
       .mt-0{margin-top: 0;}.well{background-color:white;}.bootstrap-iso .btn{border-radius: 2px;}
       .form-inline{padding: 20px;} .select { width:100%;}  .bootstrap-iso .form-control{width:50%;}
+      label.btn span {
+    font-size: 1.5em;
+}
+
+label input[type="radio"] ~ i.fa.fa-circle-o {
+    color: #c8c8c8;
+    display: inline;
+}
+
+label input[type="radio"] ~ i.fa.fa-check-circle {
+    display: none;
+}
+
+label input[type="radio"]:checked ~ i.fa.fa-circle-o {
+    display: none;
+}
+
+label input[type="radio"]:checked ~ i.fa.fa-check-circle {
+    color: yellowgreen;
+    display: inline;
+}
+
+label:hover input[type="radio"] ~ i.fa {
+    color: yellowgreen;
+}
+
+div[data-toggle="buttons"] label.active {
+    color: yellowgreen;
+}
+
+div[data-toggle="buttons"] label:hover {
+    color: ;
+}
+
+div[data-toggle="buttons"] label:active,
+div[data-toggle="buttons"] label.active {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.radio input[type="radio"] {
+    display: none;
+}
+
       </style>
 </head>
 <body>
@@ -87,12 +131,22 @@
        <input class="form-control container" placeholder="Option D" id="d" name="d" type="text"/>
       </div>
      </div>
+     <div class="form-group text-center ">
+       Correct Option
+     </div>
+     <div class="form-group text-center">
+       <div class="radio btn-group btn-group" data-toggle="buttons" ><label><input type="radio" value="a" name="correct_answer"  id="a" class="rbtn"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle fa-2x"></i><span id="a" style="font-size:20px; padding-left:10px;"></span>a</label></div>
+       <div class="radio btn-group btn-group" data-toggle="buttons" ><label><input type="radio" value="b" name="correct_answer"  id="a" class="rbtn"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle fa-2x"></i><span id="a" style="font-size:20px; padding-left:10px;"></span>b</label></div>
+       <div class="radio btn-group btn-group" data-toggle="buttons" ><label><input type="radio" value="c" name="correct_answer"  id="a" class="rbtn"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle fa-2x"></i><span id="a" style="font-size:20px; padding-left:10px;"></span>c</label></div>
+       <div class="radio btn-group btn-group" data-toggle="buttons" ><label><input type="radio" value="d" name="correct_answer"  id="a" class="rbtn"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle fa-2x"></i><span id="a" style="font-size:20px; padding-left:10px;"></span>d</label></div>
+     
+     </div>
      </div>
 
      <div class="hidden" id="fill_in">
          <div class="form-group">
              <div class="">
-             <input class="form-control container" placeholder="Answer" id="fill" name="fill_in_the_blank_answer" type="text"/>
+             <input class="form-control container" placeholder="Answer" id="fill" name="correct_fillup" type="text"/>
              </div>
          </div>
      </div>

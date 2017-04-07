@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="/css/exam.css" />
 </head>
 
-<body>
+
+<body >
     <nav class="navbar">
         <div class="navbar-header">
             <a class="navbar-brand" href="#"><img src="/logo.jpg" width="45"></a>
@@ -46,16 +47,16 @@
     <div id="target">
         <div class="col-md-10 col-lg-10 col-sm-10">
             <div class="qaa">
-                <form id="form" v-on:submit.prevent="onSubmit">
-                    <div v-for="(array,index) in question">
+                <form id="form" v-on:submit.prevent>
+                    <div v-for="array in question">
                         <div>
                             <question :que="array.question" v-if="array.question"></question>
                         </div>
-                        <optiona-box :option="array.a" v-if="array.a"> </optiona-box>
-                        <optionb-box :option="array.b" v-if="array.b"> </optionb-box>
-                        <optionc-box :option="array.c" v-if="array.c"> </optionc-box>
-                        <optiond-box :option="array.d" v-if="array.d"> </optiond-box>
-                        <text-box v-else></text-box>
+                        <optiona-box :option="array.a" v-if="!array.a==''"> </optiona-box>
+                        <optionb-box :option="array.b" v-if="!array.b==''"> </optionb-box>
+                        <optionc-box :option="array.c" v-if="!array.c==''"> </optionc-box>
+                        <optiond-box :option="array.d" v-if="!array.d==''"> </optiond-box>
+                        <text-box v-if="array.question_Type=='fill_in_the_blank_answer'"></text-box>
                         <ul class="nav navbar-nav navbar-right container-fluid">
                             <li>
                                 <button id="previous" v-if="flag" type="button" class="btn btn-default btn-block btn-lg" v-on:click="onPrev" id="prevb"><b>Previous</b></button>
@@ -65,14 +66,12 @@
                             </li>
                         </ul>
                     </div>
+                </form>
             </div>
-            </form>
         </div>
     </div>
-</body>
-
-</html>
-<script src="/js/test2.js"></script>
+    <script src="/js/test2.js">
+    </script>
 </body>
 
 </html>

@@ -1,0 +1,111 @@
+{ 
+    "_id" : ObjectId("58d8b6a4a295dc17e7741b53"), 
+    "question" : "int main()\r\n{\r\n    printf(5+\"Good Morning\\n\");\r\n    return 0;\r\n}", 
+    "question_Type" : "objective", 
+    "category" : "Programming", 
+    "a" : "Good Morning", 
+    "b" : "Good", 
+    "c" : "M", 
+    "d" : "Morning", 
+    "question_Id" : NumberInt(1), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("58d8b822a295dc17e7741b5d"), 
+    "question" : "How many times the program will print \"IndiaBIX\" ?\r\n", 
+    "question_Type" : "objective", 
+    "category" : "Programming", 
+    "a" : "Infinite times", 
+    "b" : "32767 times", 
+    "c" : "62767 times", 
+    "d" : "Till stack over flows", 
+    "question_Id" : NumberInt(3), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("58d8b87b90440119a2f6bfc8"), 
+    "question" : "What will be the output of the program?\r\n#include<stdio.h>\r\nint main()\r\n{\r\n    int i=2;\r\n    printf(\"%d, %d\\n\", ++i, ++i);\r\n    return 0;\r\n}", 
+    "question_Type" : "fill_in_the_blank_answer", 
+    "category" : "Programming", 
+    "fill_in_the_blank_answer" : "Output may vary from compiler to compiler", 
+    "question_Id" : NumberInt(4), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("58d8b8e190440119a2f6bfca"), 
+    "question" : "\t\r\nWhich of the following statements are correct about 6 used in the program?\r\nint num[6];\r\nnum[6]=21;", 
+    "question_Type" : "objective", 
+    "category" : "Programming", 
+    "a" : "In the first statement 6 specifies a particular element, whereas in the second statement it specifies a type.", 
+    "b" : "In the first statement 6 specifies a array size, whereas in the second statement it specifies a particular element of array.\t", 
+    "c" : "In the first statement 6 specifies a particular element, whereas in the second statement it specifies a array size.", 
+    "d" : "In both the statement 6 specifies array size.", 
+    "question_Id" : NumberInt(5), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("58d8b90990440119a2f6bfcc"), 
+    "question" : "\t\r\nWould the following typedef work?\r\ntypedef #include l;", 
+    "question_Type" : "fill_in_the_blank_answer", 
+    "category" : "Programming", 
+    "fill_in_the_blank_answer" : "No", 
+    "question_Id" : NumberInt(6), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("58d8b93b90440119a2f6bfce"), 
+    "question" : "If the file to be included doesn't exist, the preprocessor flashes an error message.\r\n", 
+    "question_Type" : "fill_in_the_blank_answer", 
+    "category" : "Programming", 
+    "fill_in_the_blank_answer" : "True", 
+    "question_Id" : NumberInt(7), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("58d8b9b590440119a2f6bfd0"), 
+    "question" : "Choose the word which is different from the rest.\r\n", 
+    "question_Type" : "objective", 
+    "category" : "Logical", 
+    "a" : "Honest", 
+    "b" : "Intelligent", 
+    "c" : "Traitor", 
+    "d" : "Wise", 
+    "question_Id" : NumberInt(8), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("58d8b9f690440119a2f6bfd2"), 
+    "question" : "Choose the word which is different from the rest.\r\n", 
+    "question_Type" : "objective", 
+    "category" : "Logical", 
+    "a" : "Rhinoceros", 
+    "b" : "Lion", 
+    "c" : "Ass", 
+    "d" : "Deer", 
+    "question_Id" : NumberInt(9), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("58d8e4e89387c715556c4e19"), 
+    "question" : "Alfred buys an old scooter for Rs. 4700 and spends Rs. 800 on its repairs. If he sells the scooter for Rs. 5800, his gain percent is:\r\n", 
+    "question_Type" : "objective", 
+    "category" : "Logical", 
+    "a" : "4\t4\t% 7", 
+    "b" : " 5\t5\t% 11", 
+    "c" : "10%", 
+    "d" : "11%", 
+    "question_Id" : NumberInt(10), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("58e3975ab3fdd03bdd201183"), 
+    "question_Id" : NumberInt(14), 
+    "question" : "In which decade was the American Institute of Electrical Engineers (AIEE) founded?", 
+    "question_Type" : "objective", 
+    "category" : "Logical", 
+    "a" : "1850s", 
+    "b" : "1880s", 
+    "c" : "1890s", 
+    "d" : "1920s", 
+    "__v" : NumberInt(0)
+}
