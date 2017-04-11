@@ -19,7 +19,7 @@ question_Type :{
 category :
 {
 	type:String,
-	required:true
+	// required:true
 },
 	a:{
 		type:String
@@ -33,6 +33,12 @@ category :
 	d:{
 		type:String
 	},
+	e:{
+		type:String
+	},
+	f:{
+		type:String
+	},
 	correct_answer:{
 		type:String
 	}
@@ -43,10 +49,10 @@ qaSchema.plugin(autoIncrement.plugin, {
     startAt: 1,
     incrementBy:1
 });
-qaSchema.methods.toJSON =  function(){
-var question = this;
-  var questionObject = question.toObject();
-  return _.pick(questionObject, ['question', 'question_Type', 'category', 'a', 'b', 'c', 'd','question_Id']);
-};
+// qaSchema.methods.toJSON =  function(){
+// var question = this;
+//   var questionObject = question.toObject();
+//   return _.pick(questionObject, ['question', 'question_Type', 'category', 'a', 'b', 'c', 'd','question_Id']);
+// };
 var qa=mongoose.model('questions',qaSchema);
 module.exports={qa};

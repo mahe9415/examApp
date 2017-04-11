@@ -38,7 +38,7 @@ tel:
 		validator:(value)=>{
       return validator.isMobilePhone(value,'en-IN');
             },
-	message:'Not valid mobile number'
+	message: value +'Not valid mobile number'
 	}
 },
 email: {
@@ -91,5 +91,5 @@ AdminSchema.statics.findByToken = function (token) {
     'tokens.access': 'auth'
   });
 };
-var Admin = mongoose.model('students',AdminSchema);
+var Admin = mongoose.model('admin',AdminSchema);
 module.exports = {Admin}

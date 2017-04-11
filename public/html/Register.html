@@ -1,123 +1,156 @@
 <!DOCTYPE html>
 <html>
-<head> 
- <title></title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/css/lib/bootstrap-iso.css" /> 
-<link rel="stylesheet" href="/css/lib/fw/css/font-awesome.min.css" />
-<link rel="stylesheet" href="/css/lib/bootstrap.min.css"/>  
 
-<style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}.form-horizontal{display:block;width:100%;margin-left:240px;}.mt-0{
-      margin-top: 0;
+<head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/lib/bootstrap-iso.css" />
+    <link rel="stylesheet" href="/css/lib/fw/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/css/lib/bootstrap.min.css" />
+    <script src="/js/jquery.min.js"></script>
+    <style>
+    .bootstrap-iso .formden_header h2,
+    .bootstrap-iso .formden_header p,
+    .bootstrap-iso form {
+        font-family: Arial, Helvetica, sans-serif;
+        color: black
     }
-    .well {
-      background-color:white;
-    }
-    .container{width:50%;}
-</style>
-</head>
-<body>
-<div calss="container">
-<a class="navbar-brand" href="#"><img src="http://nfnlabs.in/images/logo_nav.jpg" width="50"></a>
-<h2 class="well text-center mt-0"> Welcome to NFNLabs</h2>
-</div>
- <div class="container">
-    <form  method="post" action="/postUserData" autocomplete="off">
-     <div class="form-group container">
-       <div class="input-group">
-        <div class="input-group-addon">
-         <i class="fa fa-black-tie">
-         </i>
-        </div>
-        <input class="form-control"  id="name" name="name" placeholder="Name" type="text"/>
-       </div>
-     </div>
-     <div class="form-group container ">
-       <div class="input-group">
-        <div class="input-group-addon">
-         <i class="fa fa-sort-numeric-asc">
-         </i>
-        </div>
-        <input class="form-control " id="studentId" name="studentId" placeholder="ID" type="text"/>
-       </div>
-      </div>
     
-     <div class="form-group container">
-      <label class="control-label" for="sgender">
-       Gender
-      </label>
-       <label class="radio-inline">
-        <input name="gender" type="radio" value="Male"/>
-        Male
-       </label>
-       <label class="radio-inline">
-        <input name="gender" type="radio" value="Female"/>
-        Female
-       </label>
+    .bootstrap-iso form button,
+    .bootstrap-iso form button:hover {
+        color: white !important;
+    }
+    
+    .asteriskField {
+        color: red;
+    }
+    
+    .form-horizontal {
+        display: block;
+        width: 100%;
+        margin-left: 240px;
+    }
+    
+    .mt-0 {
+        margin-top: 0;
+    }
+    
+    .well {
+        background-color: white;
+    }
+    
+    .container {
+        width: 50%;
+    }
+    </style>
+</head>
 
-     </div>
-     <div class="form-group container">
+<body>
+    <div calss="container">
+        <a class="navbar-brand" href="#"><img src="http://nfnlabs.in/images/logo_nav.jpg" width="50"></a>
+        <h2 class="well text-center mt-0"> Welcome to NFNLabs</h2>
+    </div>
+    <div class="container">
+        <form method="post" action="/postUserData" autocomplete="off" id="form1">
+            <div class="form-group container">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-black-tie">
+         </i>
+                    </div>
+                    <input class="form-control" id="name" name="name" placeholder="Name" type="text" />
+                </div>
+            </div>
+            <div class="form-group container ">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-sort-numeric-asc">
+         </i>
+                    </div>
+                    <input class="form-control " id="studentId" name="studentId" placeholder="ID" type="text" />
+                </div>
+            </div>
+            <div class="form-group container">
+                <select class="select form-control" id="gender" name="gender">
+                    <option value="Select" selected disabled>
+                        Gender
+                    </option>
+                    <option value="male">
+                        Male
+                    </option>
+                    <option value="female">
+                        Female
+                    </option>
+                </select>
+            </div>
+            <div class="form-group container">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar-o">
+         </i>
+                    </div>
+                    <input class="form-control" id="dob" name="dob" placeholder="MM/DD/YYYY" type="text" />
+                </div>
+            </div>
+            <div class="form-group container">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-graduation-cap">
+         </i>
+                    </div>
+                    <input class="form-control" id="college" name="college" placeholder="College Name" type="text" />
+                </div>
+            </div>
+            <div class="form-group container">
+                <select class="select form-control" id="department" name="department">
+                    <option value="Select" selected disabled>
+                        Department
+                    </option>
+                    <option value="M C A">
+                        M C A
+                    </option>
+                    <option value="B E">
+                        B E
+                    </option>
+                </select>
+            </div>
+            <div class="form-group container">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-phone">
+         </i>
+                    </div>
+                    <input class="form-control" id="tel" name="tel" placeholder="Mobile" type="text" />
+                </div>
+            </div>
+            <div class="form-group container">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-envelope-o">
+         </i>
+                    </div>
+                    <input class="form-control" id="email" name="email" type="text" placeholder="E-mail" />
+                </div>
+            </div>
+            <div class="form-group container">
+                <textarea class="form-control" id="address" name="address" placeholder="Address" rows="4"></textarea>
+            </div>
+            <div class="form-group container">
+                <button class="btn btn-success btn-lg pull-right" id="submit" onclick="send1()" name="submit" type="submit">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript">
+    $(document).ready(function() {
+  $(window).keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
   
-       <div class="input-group">
-        <div class="input-group-addon">
-         <i class="fa fa-calendar-o">
-         </i>
-        </div>
-        <input class="form-control" id="dob" name="dob" placeholder="MM/DD/YYYY" type="text"/>
-       </div>
-     </div>
-     <div class="form-group container">
-       <div class="input-group">
-        <div class="input-group-addon">
-         <i class="fa fa-graduation-cap">
-         </i>
-        </div>
-        <input class="form-control" id="college" name="college" placeholder="College Name" type="text"/>
-       </div>
-      </div>
-     <div class="form-group container">
-       <select class="select form-control" id="department" name="department">
-        <option value="Select" selected disabled>
-         Department
-        </option>
-        <option value="M C A">
-         M C A
-        </option>
-        <option value="B E">
-         B E
-        </option>
-       </select>
-     </div>
-     <div class="form-group container">
-       <div class="input-group">
-        <div class="input-group-addon">
-         <i class="fa fa-phone">
-         </i>
-        </div>
-        <input class="form-control" id="tel" name="tel" placeholder="Mobile" type="text"/>
-       </div>
-      </div>
-     <div class="form-group container">
-       <div class="input-group">
-        <div class="input-group-addon">
-         <i class="fa fa-envelope-o">
-         </i>
-        </div>
-        <input class="form-control" id="email" name="email" type="text" placeholder="E-mail"/>
-       </div>
-      </div>
-     <div class="form-group container">
-       <textarea class="form-control" id="address" name="address" placeholder="Address" rows="4"></textarea>
-      </div>
-     <div class="form-group container">
-           <button class="btn btn-success btn-lg pull-right" name="submit" type="submit">
-        Submit
-       </button>
-     </div>
-    </form>
-
-
- </div>
-<script type="text/javascript">
-</script>
+    </script>
 </body>

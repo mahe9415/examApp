@@ -21,11 +21,9 @@
  <div class="container-fluid">
   <div class="row">
    <div class="">
-    <form class="form-horizontal container" method="post" action="/postQuestions">
+    <form class="form-horizontal container" id="form1" method="post" action="/postQuestions">
      <div class="form-group container">
-      
        <textarea class="form-control container"  id="question" name="question" placeholder="Type the Question" rows="10"></textarea>
-    
      </div>
      <div class="form-inline text-center">
      <div class="form-group container-fluid">
@@ -83,6 +81,28 @@
        <input class="form-control container" placeholder="Option D" id="d" name="d" type="text"/>
       </div>
      </div>
+      <div class="form-group text-center ">
+                                Correct Option
+                            </div>
+                            <div class="form-group text-center">
+                                <div class="radio btn-group btn-group" data-toggle="buttons">
+                                    <label>
+                                        <input type="radio" value="a" name="correct_answer" id="a" class="rbtn"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle fa-2x"></i><span id="a" style="font-size:20px; padding-left:10px;"></span>a</label>
+                                </div>
+                                <div class="radio btn-group btn-group" data-toggle="buttons">
+                                    <label>
+                                        <input type="radio" value="b" name="correct_answer" id="a" class="rbtn"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle fa-2x"></i><span id="a" style="font-size:20px; padding-left:10px;"></span>b</label>
+                                </div>
+                                <div class="radio btn-group btn-group" data-toggle="buttons">
+                                    <label>
+                                        <input type="radio" value="c" name="correct_answer" id="a" class="rbtn"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle fa-2x"></i><span id="a" style="font-size:20px; padding-left:10px;"></span>c</label>
+                                </div>
+                                <div class="radio btn-group btn-group" data-toggle="buttons">
+                                    <label>
+                                        <input type="radio" value="d" name="correct_answer" id="a" class="rbtn"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle fa-2x"></i><span id="a" style="font-size:20px; padding-left:10px;"></span>d</label>
+                                </div>
+                            </div>
+
      </div>
 
      <div class="hidden" id="fill_in">
@@ -92,6 +112,7 @@
              </div>
          </div>
      </div>
+
 
      <div class="form-group form-btn text-center">
       
@@ -106,16 +127,28 @@
  </div>
 </div>
 <script type="text/javascript">
+  
+$(document).ready(function() {
+      $(window).keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+      });
+    });
+
   $("#question_Type").on('change',function(){
     if(this.value == 'fill_in_the_blank_answer'){
-    $("#fill_in").attr('class',"container");
+    $("#fill_in").attr('class',"");
     $("#obj1").attr('class',"hidden");
     }
     else if(this.value=='objective'){
-      $("#obj1").attr('class',"container");
+      $("#obj1").attr('class',"");
        $("#fill_in").attr('class',"hidden");
     }
 })
+
+
 </script>
 </body>
 </html>

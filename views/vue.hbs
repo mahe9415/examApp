@@ -49,11 +49,12 @@
                     <div v-for="array in question">
                         <div>
                             <question :que="array.question" v-if="array.question"></question>
-                        </div>
-                        <optiona-box :option="array.a" v-if="!array.a==''"> </optiona-box>
-                        <optionb-box :option="array.b" v-if="!array.b==''"> </optionb-box>
-                        <optionc-box :option="array.c" v-if="!array.c==''"> </optionc-box>
-                        <optiond-box :option="array.d" v-if="!array.d==''"> </optiond-box>
+                        </div>  <optionbox :option="array.a" val="a" v-if="!array.a==''"> </optionbox>
+                                <optionbox :option="array.b" val="b" v-if="!array.b==''"> </optionbox>
+                                <optionbox :option="array.c" val="c" v-if="!array.c==''"> </optionbox>
+                                <optionbox :option="array.d" val="d" v-if="!array.d==''"> </optionbox>
+                                <optionbox :option="array.e" val="e" v-if="!array.e==''"> </optionbox>
+                                <optionbox :option="array.f" val="f" v-if="!array.f==''"> </optionbox>
                         <text-box v-if="array.question_Type=='fill_in_the_blank_answer'"></text-box>
                         <ul class="nav navbar-nav navbar-right container-fluid">
                             <li>

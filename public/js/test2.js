@@ -1,19 +1,7 @@
 var jq = $.noConflict();
-Vue.component('optiona-box', {
-    props: ['option'],
-    template: '<div class="radio well btn-group btn-group" data-toggle="buttons" ><label><input type="radio" value="a" name="ans"  id="a" class="rbtn"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle fa-2x"></i><span id="a" style="font-size:20px; padding-left:30px;"></span>{{option}}</label></div>'
-});
-Vue.component('optionb-box', {
-    props: ['option'],
-    template: '<div class="radio well btn-group btn-group" data-toggle="buttons" ><label><input type="radio" value="b" name="ans"  id="b" class="rbtn"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle fa-2x"></i><span id="a" style="font-size:20px; padding-left:30px;"></span>{{option}}</label></div>'
-});
-Vue.component('optionc-box', {
-    props: ['option'],
-    template: '<div class="radio well btn-group btn-group" data-toggle="buttons" ><label><input type="radio" value="c" name="ans"  id="c" class="rbtn"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle fa-2x"></i><span id="a" style="font-size:20px; padding-left:30px;"></span>{{option}}</label></div>'
-});
-Vue.component('optiond-box', {
-    props: ['option'],
-    template: '<div class="radio well btn-group btn-group" data-toggle="buttons" ><label><input type="radio" value="d" name="ans"  id="d" class="rbtn"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle fa-2x"></i><span id="a" style="font-size:20px; padding-left:30px;"></span>{{option}}</label></div>'
+Vue.component('optionbox', {
+    props: ['option','val'],
+    template: '<div class="radio well btn-group btn-group" data-toggle="buttons" ><label><input type="radio" :value=val name="ans"  id="a" class="rbtn"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle fa-2x"></i><span id="a" style="font-size:20px; padding-left:30px;"></span>{{option}}</label></div>'
 });
 Vue.component('question', {
     props: ['que'],
@@ -54,9 +42,8 @@ var vm = new Vue({
                     var question_Id = item.question_Id;
                     return { "userAnswer": answer, "question_Id": question_Id, "ans_validate": "" };
                 })
-                console.log(arr);
                 this.postAns(arr);
-                
+                window.location.pathname='/displayResult';
                 return;
             }
             vm.flag = true;
@@ -123,7 +110,7 @@ var vm = new Vue({
                 url: '/result',
                 data: { "answer": ans },
                 success:function(result){
-                    window.location.pathname='/displayResult';
+                    // window.location.pathname='/displayResult';
                 }
 
             })
