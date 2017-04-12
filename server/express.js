@@ -25,7 +25,7 @@ var sess;
 app.post('/postQuestions', (req, res) => {
     console.log(req.body);
     if (req.body.question_Type == 'objective') {
-        var body = _.pick(req.body, ['question', 'question_Type', 'category', 'a', 'b', 'c', 'd', 'correct_answer']);
+        var body = _.pick(req.body, ['question', 'question_Type', 'category', 'a', 'b', 'c', 'd','e','f','correct_answer']);
         console.log(body);
         var que = new qa(body);
         que.save().then((doc) => {
@@ -56,25 +56,37 @@ app.get('/check', (req, res) => {
     })
     //send an array of question and answer to browser via ajax call at onload
 app.get("/log", (req, res) => {
-        qa.find({},'question question_Type category a b c d question_Id ').then((doc) => {
+        qa.find({},'question question_Type category a b c d e f question_Id ').then((doc) => {
             res.send(doc);
         })
     })
 app.get("/logAdmin", (req, res) => {
-        qa.find({},'question question_Type category a b c d question_Id correct_answer').then((doc) => {
+        qa.find({},'question question_Type category a b c d e f  question_Id correct_answer').then((doc) => {
             res.send(doc);
         })
     })
 app.delete("/log",(req,res)=>{
     console.log(req.body.question_Id);
-    qa.findOneAndRemove({question_Id:req.body.question_Id})
+    // qa.findOneAndRemove({question_Id:req.body.question_Id})
+    qa.remove({question_Id:req.body.question_Id})
     .then((doc)=>{
         console.log("deleted :"+doc);
+        res.status(200).send();
     })
+
 })
 app.patch("/log",(req,res)=>{
-    console.log(req.body.question_Id);
-    qa.findOneAndUpdate({"question_Id":req.body.question_Id})
+    // console.log(req.body);
+    var data=req.body.data;
+    if(data.question_Type== 'fill_in_the_blank_answer'){
+    data.correct_answer = data.correct_fillup;}
+    // data.correct_answer=req.body.data.correct_fillup;
+    qa.findOneAndUpdate({"question_Id":req.body.question_Id},{$set :data})
+    .then((doc)=>{
+        console.log(doc)
+    })
+    // qa.update({"question_Id":req.body.question_Id},{$set :data});
+    res.status(200).send()
 })
     
 app.post("/result", authenticate, (req, res) => {

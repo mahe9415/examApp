@@ -55,7 +55,7 @@
         /*border: 1px solid gray;*/
         border-radius: 0px;
         width: 100%;
-        padding: 4%;
+        /*padding: 4%;*/
     }
     
     .form {
@@ -95,26 +95,26 @@
 
             </div>
             <div class="hidden" id="obj1">
-                <textbox display="Option A" val="a"></textbox>
-                <textbox display="Option B" val="b"></textbox>
-                <textbox v-if="count >=1" display="Option C" val="c"></textbox>
-                <textbox v-if="count >=2" display="Option D" val="d"></textbox>
-                <textbox v-if="count >=3" display="Option E" val="e"></textbox>
-                <textbox v-if="count >=4" display="Option F" val="f"></textbox>
+                <textbox v-if="count >=1"display="Option A" val="a"></textbox>
+                <textbox v-if="count >=2" display="Option B" val="b"></textbox>
+                <textbox v-if="count >=3" display="Option C" val="c"></textbox>
+                <textbox v-if="count >=4" display="Option D" val="d"></textbox>
+                <textbox v-if="count >=5" display="Option E" val="e"></textbox>
+                <textbox v-if="count >=6" display="Option F" val="f"></textbox>
                 <div class="container-fluid">
-                <button class="btn btn-primary btn-sm pull-right" v-if="count >0" v-on:submit.prevent v-on:click="count=count-1"> Remove Field </button>
-                <button class="btn btn-primary btn-sm pull-right" v-if="count < 4" v-on:submit.prevent v-on:click="count=count+1"> Add Field </button>
+                <button class="btn btn-primary btn-sm pull-right" v-if="count >2" v-on:submit.prevent v-on:click="count=count-1"> Remove Field </button>
+                <button class="btn btn-primary btn-sm pull-right" v-if="count < 6" v-on:submit.prevent v-on:click="count=count+1"> Add Field </button>
                 </div>
                 <div class="form-group text-center ">
                     Correct Option
                 </div>
                 <div class="form-group text-center">
-                    <rbutton val="a"></rbutton>
-                    <rbutton val="b"></rbutton>
-                    <rbutton v-if="count >=1" val="c"></rbutton>
-                    <rbutton v-if="count >=2" val="d"></rbutton>
-                    <rbutton v-if="count >=3" val="e"></rbutton>
-                    <rbutton v-if="count >=4" val="f"></rbutton>
+                    <rbutton v-if="count >=1" val="a"></rbutton>
+                    <rbutton v-if="count >=2" val="b"></rbutton>
+                    <rbutton v-if="count >=3" val="c"></rbutton>
+                    <rbutton v-if="count >=4" val="d"></rbutton>
+                    <rbutton v-if="count >=5" val="e"></rbutton>
+                    <rbutton v-if="count >=6" val="f"></rbutton>
             </div>
             </div>
             <div class="hidden" id="fill_in">
@@ -125,8 +125,11 @@
                 </div>
             </div>
             <div class="form-group form-btn text-center" id="btn">
-                <button class="btn btn-success btn-lg" v-if="addBtn==true" name="submit" onclick="sendForm()">
+                <button class="btn btn-success btn-lg" v-if="addBtn" name="submit" v-on:click="sendForm()">
                     Add
+                </button>
+
+                <button class="btn btn-success btn-lg" v-if="!addBtn" name="submit" v-on:click="updateForm()">Update
                 </button>
             </div>
         <!-- </form> -->
