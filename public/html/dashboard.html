@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/lib/fw/css/font-awesome.min.css" />
     <link rel="stylesheet" href="/css/lib/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/exam.css" />
+    <link rel="stylesheet" href="/css/checkbox.css" />
     <style type="text/css">
     .well {
     padding: 23px;
@@ -67,9 +68,12 @@
     .radio {
         display: inline;
     }
+    #question_Type{
+        width:25%;
+        margin-left:38%;
+    }
     </style>
 </head>
-
 <body>
     <div calss="container-fluid">
         <a class="navbar-brand" href="#"><img src="/logo.jpg" width="50"></a>
@@ -81,7 +85,7 @@
                 <textarea class="form-control" id="question" name="question" placeholder="Type the Question" rows="10"></textarea>
             </div>
             <div class="form-group ">
-                <select class="select form-control" v-model="selected" id="question_Type" name="question_Type">
+                <select class="select form-control"  id="question_Type" name="question_Type">
                     <option disabled selected>
                         Question type
                     </option>
@@ -95,7 +99,9 @@
 
             </div>
             <div class="hidden" id="obj1">
-                <textbox v-if="count >=1"display="Option A" val="a"></textbox>
+                <!-- <input type="checkbox" id="test1" /> -->
+    <!-- <label for="test1"><input type="text"></label> -->
+                <textbox v-if="count >=1" display="Option A" val="a"></textbox>
                 <textbox v-if="count >=2" display="Option B" val="b"></textbox>
                 <textbox v-if="count >=3" display="Option C" val="c"></textbox>
                 <textbox v-if="count >=4" display="Option D" val="d"></textbox>
@@ -123,6 +129,14 @@
                         <input class="form-control " placeholder="Answer" id="fillup" name="correct_fillup" type="text" />
                     </div>
                 </div>
+            </div>
+            <div calss="form-group" id="check">
+            
+            <checkbox val="12345" textval="t12"></checkbox>
+            <checkbox val="1234" textval="t1"></checkbox>
+            <checkbox val="123" textval="t"></checkbox>
+
+            
             </div>
             <div class="form-group form-btn text-center" id="btn">
                 <button class="btn btn-success btn-lg" v-if="addBtn" name="submit" v-on:click="sendForm()">

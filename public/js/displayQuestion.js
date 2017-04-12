@@ -51,23 +51,23 @@ var vm = new Vue({
                 var type = vm.questionArray[index].question_Type;
                 jq("#question_Type").val(type);
                 if (type == 'objective') {
-                    var promise1=new Promise((resolve,reject)=>{
-                    debugger;
+                    // var promise1=new Promise((resolve,reject)=>{
+                    // debugger;
                     console.log("msg");
                     jq("#obj1").attr('class', "");
                     jq("#fill_in").attr('class', "hidden");
                     jq('input[name=correct_answer][value='+vm.questionArray[index].correct_answer+']').prop('checked', true);
                     
-                    resolve();
-                    })
-                    promise1.then(()=>{
+                    // resolve();
+                    // })
+                    // promise1.then(()=>{
                     jq('input[name="a"]').val(vm.questionArray[index].a)
                     jq('input[name="b"]').val(vm.questionArray[index].b)
                     jq('input[name="c"]').val(vm.questionArray[index].c)
                     jq('input[name="d"]').val(vm.questionArray[index].d)
                     jq('input[name="e"]').val(vm.questionArray[index].e)
                     jq('input[name="f"]').val(vm.questionArray[index].f)
-                    })
+                    // })
                 } else if (type == 'fill_in_the_blank_answer') {
                     jq("#fillup").val(vm.questionArray[index].correct_answer);
                     jq("#fill_in").attr('class', "");
@@ -80,6 +80,13 @@ var vm = new Vue({
     }
 
 })
+Vue.component('checkbox',{
+    props:['val','textval'],
+    template:'<div class="form-group"> <input class="form-control" type="checkbox" name="checkbox" :id="val"><label :for="val"> <input class="form-control" type="text" :id="textval"></label></div>'
+})
+var vm3=new Vue({
+    el:'#check'
+});
 Vue.component('textbox', {
     props: ['display', 'val'],
     template: '<div class="form-group"><input class="form-control" :placeholder=display :name=val type="text" autocomplete="off"/></div></div>'
@@ -198,7 +205,8 @@ var vm2 = new Vue({
                 method: 'PATCH',
                 data: { "question_Id": vm2.id, "data": data },
                 success: function(res) {
-                 vm2.id=0;   
+                 vm2.id=0;
+                 vm2.addBtn=true;   
                 resetAll();
             }
             });
