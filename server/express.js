@@ -43,6 +43,16 @@ app.post('/postQuestions', (req, res) => {
             res.send("posted a fill_in_the_blank_answer");
         })
     }
+    if(req.body.question_Type =='checkbox'){
+        var body = _.pick(req.body, ['question', 'question_Type', 'category','c1','c2','c3','c4','c5','c6']);
+        body.correct_answer=req.body.correct_checkbox;
+        var que=new qa(body);
+        que.save()
+        .then((doc)=>{
+            res.status(200).send()
+        })
+        
+    }
 });
 
 app.get('/check', (req, res) => {
@@ -56,12 +66,12 @@ app.get('/check', (req, res) => {
     })
     //send an array of question and answer to browser via ajax call at onload
 app.get("/log", (req, res) => {
-        qa.find({},'question question_Type category a b c d e f question_Id ').then((doc) => {
+        qa.find({},'question question_Type category a b c d e f c1 c2 c3 c4 c5 c6 question_Id ').then((doc) => {
             res.send(doc);
         })
     })
 app.get("/logAdmin", (req, res) => {
-        qa.find({},'question question_Type category a b c d e f  question_Id correct_answer').then((doc) => {
+        qa.find({},'question question_Type category a b c d e f c1 c2 c3 c4 c5 c6 question_Id correct_answer').then((doc) => {
             res.send(doc);
         })
     })
@@ -89,22 +99,28 @@ app.patch("/log",(req,res)=>{
     res.status(200).send()
 })
     
-app.post("/result", authenticate, (req, res) => {
+app.post("/result", (req, res) => {
     var count = 0;
+    console.log(req.body)
     var body = _.pick(req.body, ['answer']);
     _.forEach(body.answer, function(value, index) {
         qa.find({ 'question_Id': value.question_Id }, 'correct_answer').then((doc) => {
+            // console.log(doc[0].correct_answer)
+            console.log(value.userAnswer+"val")
+            console.log(doc[0].correct_answer+"db")
             if (value.userAnswer == doc[0].correct_answer) {
                 body.answer[index].ans_validate = true
                 count++;
+                // console.log("rigth:"+body.answer[index].tostring());
             } else {
                 body.answer[index].ans_validate = false
-                console.log("wrong");
+                // console.log("wrong:"+body.answer[index]);
+                // console.log("correct answer"+doc[0]);
             }
-            console.log(index);
+            // console.log(index);
             // console.log(body.answer);
             if (index == (body.answer.length)-1){
-                // console.log("msg");
+            console.log(count+"mark");
             var ans = new result(body);
             ans.user = req.user.name;
             ans.count = count;
@@ -139,7 +155,7 @@ app.get('/checkToken', authenticate, (req, res) => {
     })
     //POST USER DATA //register.html
 app.post('/postUserData', (req, res) => {
-    console.log(req);
+    console.log(req.body);
     var user = new User(req.body);
     user.save().then(() => {
         return user.generateAuthToken();

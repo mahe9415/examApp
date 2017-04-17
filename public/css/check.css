@@ -1,0 +1,49 @@
+.wrap label {
+  position: relative;
+}
+
+input[type="checkbox"]{
+  display: none;
+}
+/* Base styles for spans */
+.wrap span::before,
+.wrap span::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+span.checkbox::before {
+  width: 27px;
+  height: 27px;
+  background-color: #fff;
+  left: -3%;
+  /*top:-3%;*/
+  top: 0;
+  bottom: 0;
+  box-sizing: border-box;
+  border: 3px solid transparent;
+  transition: border-color .2s;
+   border-color: #bbb;
+  border-radius:3px;
+   background-color: #fff;
+}
+.checkbox:hover::before {
+  border: 3px solid yellowgreen;
+}
+span.checkbox::after {
+  content: '✔';
+  font-family: 'FontAwesome';
+  /*padding:-3%;*/
+  left: -3%;
+  /*top:-3%;*/
+  /*top: 2px;*/
+  top: 0;
+  bottom: 0;
+  color: transparent;
+  transition: color .2s;
+}
+input[type="checkbox"]:checked + label span.checkbox::before {
+  color: yellowgreen;
+}

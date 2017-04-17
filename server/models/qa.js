@@ -41,7 +41,25 @@ category :
 	},
 	correct_answer:{
 		type:String
-	}
+	},
+	c1:{
+		type:String
+	},
+	c2:{
+		type:String
+	},
+	c3:{
+		type:String
+	},
+	c4:{
+		type:String
+	},
+	c5:{
+		type:String
+	},
+	c6:{
+		type:String
+	},
 });
 qaSchema.plugin(autoIncrement.plugin, {
     model: 'qa',
