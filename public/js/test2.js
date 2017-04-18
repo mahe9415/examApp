@@ -1,8 +1,8 @@
 var jq = $.noConflict();
-Vue.component('optionbox', {
-    props: ['option', 'val'],
-    template: '<label class="radio well btn-group" data-toggle="buttons" ><input type="radio" :value=val name="ans"  id="a" class="rbtn"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle fa-2x"></i><span id="a" style="font-size:20px; padding-left:30px;"></span>{{option}}</label>'
-});
+// Vue.component('optionbox', {
+//     props: ['option', 'val'],
+//     template: '<label class="radio well btn-group" data-toggle="buttons" ><input type="radio" :value=val name="ans"  class="rbtn"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle fa-2x"></i><span id="a" style="font-size:20px; padding-left:30px;"></span>{{option}}</label>'
+// });
 Vue.component('question', {
     props: ['que'],
     template: '<div class="well"><small id="small"> Question</small> <small id="qtype"></small><br><h4 id="question1" style="font-size:25px;">{{que}}</h4></div>'
@@ -10,10 +10,19 @@ Vue.component('question', {
 Vue.component('text-box', {
     template: '<input type="text" id="fill" name="fill_in_the_blank_answer" autocomplete="off">'
 })
+// Vue.component('checkbox', {
+//     props: ['option','val'],
+//     // template: '<div><input type="checkbox" name="group2" id="checkbox-2"><label for="checkbox-2"><span class="checkbox">{{option}}</span></label></div>'
+//     template:'<label class="wrap well btn-group radio" :for="val"><input type="checkbox" name="checkbox" :value="val" :id="val"><label :for="val"><span class="checkbox">{{option}}</span></label></label>'
+// })
+Vue.component('optionbox',{
+    props:['option','val'],
+    template:'<div><input type="radio" :value="val" name="ans" :id="val"><label class="radio well btn-group rbtn" :for="val">{{option}}</label></div>'
+})
 Vue.component('checkbox', {
     props: ['option','val'],
     // template: '<div><input type="checkbox" name="group2" id="checkbox-2"><label for="checkbox-2"><span class="checkbox">{{option}}</span></label></div>'
-    template:'<label class="wrap well btn-group radio" :for="val"><input type="checkbox" name="checkbox" :id="val"><label :for="val"><span class="checkbox">{{option}}</span></label></label>'
+    template:'<div><input type="checkbox" name="checkbox" :value="val" :id="val"><label class="radio well btn-group rbtn" :for="val">{{option}}</label></div>'
 })
 
 function checked() {
@@ -51,7 +60,7 @@ var vm = new Vue({
                 console.log(length);
                 var arr = vm.questionArray.map(function(item) {
                     if(item.answer==undefined){
-                        item.answer='';
+                        item.answer=' ';
                     }
                     var answer = item.answer.toString();
                     console.log(answer)
@@ -113,6 +122,7 @@ var vm = new Vue({
                 // console.log(answer)
                 for (value of answer) {
                     if(value.value){
+                        console.log(value.value);
                     checkedAnswer.push(value['value']);
                 }
                 }

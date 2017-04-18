@@ -55,15 +55,6 @@ app.post('/postQuestions', (req, res) => {
     }
 });
 
-app.get('/check', (req, res) => {
-        qa.find({}, 'question a').then((doc) => {
-            console.log(doc);
-            res.send(doc[0].question, doc[0].a);
-            console.log(doc);
-        }).catch((e) => {
-            res.send(e);
-        })
-    })
     //send an array of question and answer to browser via ajax call at onload
 app.get("/log", (req, res) => {
         qa.find({},'question question_Type category a b c d e f c1 c2 c3 c4 c5 c6 question_Id ').then((doc) => {
@@ -83,13 +74,15 @@ app.delete("/log",(req,res)=>{
         console.log("deleted :"+doc);
         res.status(200).send();
     })
-
 })
 app.patch("/log",(req,res)=>{
-    // console.log(req.body);
+    console.log(req.body);
     var data=req.body.data;
     if(data.question_Type== 'fill_in_the_blank_answer'){
     data.correct_answer = data.correct_fillup;}
+    else if(data.question_Type=='checkbox'){
+        data.correct_answer = data.correct_checkbox;
+    }
     // data.correct_answer=req.body.data.correct_fillup;
     qa.findOneAndUpdate({"question_Id":req.body.question_Id},{$set :data})
     .then((doc)=>{
@@ -99,7 +92,7 @@ app.patch("/log",(req,res)=>{
     res.status(200).send()
 })
     
-app.post("/result", (req, res) => {
+app.post("/result",authenticate,(req, res) => {
     var count = 0;
     console.log(req.body)
     var body = _.pick(req.body, ['answer']);
@@ -124,6 +117,7 @@ app.post("/result", (req, res) => {
             var ans = new result(body);
             ans.user = req.user.name;
             ans.count = count;
+            ans.id=req.user.studentId;
             ans.save().then((doc) => {
                 console.log(doc);
                 res.send();
@@ -146,8 +140,6 @@ app.get('/displayResult',authenticate,(req, res) => {
     // res.render('result.hbs', { user: 'user', count: 'count' });
 
 })
-
-
 app.get('/checkToken', authenticate, (req, res) => {
         User.find({}).then((doc) => {
             res.send(doc);
@@ -176,8 +168,6 @@ app.get('/login', (req, res) => {
     }
     console.log(req);
 })
-
-
 //question render 
 app.get('/', (req, res) => {
 
@@ -185,10 +175,6 @@ app.get('/', (req, res) => {
     res.render('exampage.hbs', { que: "ha" });
 
 });
-
-
-
-
 app.post('/adminLogin', (req, res) => {
     // var body = _.pick(req.body, ['user', 'password']);
     console.log(req.body.user);
@@ -198,4 +184,19 @@ app.post('/adminLogin', (req, res) => {
         res.status(400).send("bad request");
     }
 });
+app.get('/fetchResults',(req,res)=>{
+    // console.log("msg")
+    result.find({},'user count').sort({count:"descending"})
+    .then((doc)=>{
+        console.log(doc);
+        res.send(doc);
+    })
+})
+app.get('/fetchQuestions',(req,res)=>{
+    qa.find({},'question_Id question_Type category question')
+    .then((doc)=>{
+        console.log(doc);
+        res.send(doc);
+    })
+})
 app.listen('3000', '0.0.0.0');

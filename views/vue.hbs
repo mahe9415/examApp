@@ -10,8 +10,16 @@
     <link rel="stylesheet" href="/css/lib/fw/css/font-awesome.min.css" />
     <link rel="stylesheet" href="/css/lib/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/exam.css" />
+    <link rel="stylesheet" href="/css/checkbox.css" />
+    <style type="text/css">
+        #wrapper{
+            border-bottom: 1px solid;
+        }
+    </style>
 </head>
-<body>
+
+
+<body >
     <nav class="navbar">
         <div class="navbar-header">
             <a class="navbar-brand" href="#"><img src="/logo.jpg" width="45"></a>
@@ -46,16 +54,22 @@
         <div class="col-md-10 col-lg-10 col-sm-10">
             <div class="qaa">
                 <form id="form" v-on:submit.prevent>
-                    <div v-for="array in question">
-                        <div>
+                    <div id="wrapper" v-for="array in question">
+                        <div >
                             <question :que="array.question" v-if="array.question"></question>
-                        </div>  <optionbox :option="array.a" val="a" v-if="!array.a==''"> </optionbox>
+                        </div><optionbox :option="array.a" val="a" v-if="!array.a==''"> </optionbox>
                                 <optionbox :option="array.b" val="b" v-if="!array.b==''"> </optionbox>
                                 <optionbox :option="array.c" val="c" v-if="!array.c==''"> </optionbox>
                                 <optionbox :option="array.d" val="d" v-if="!array.d==''"> </optionbox>
                                 <optionbox :option="array.e" val="e" v-if="!array.e==''"> </optionbox>
                                 <optionbox :option="array.f" val="f" v-if="!array.f==''"> </optionbox>
                         <text-box v-if="array.question_Type=='fill_in_the_blank_answer'"></text-box>
+                        <checkbox :option="array.c1" val="a" v-if="!array.c1=='' "></checkbox>
+                        <checkbox :option="array.c2" val="b" v-if="!array.c2==''"></checkbox>
+                        <checkbox :option="array.c3" val="c" v-if="!array.c3==''"></checkbox>
+                        <checkbox :option="array.c4" val="d" v-if="!array.c4==''"></checkbox>
+                        <checkbox :option="array.c5" val="e" v-if="!array.c5==''"></checkbox>
+                        <checkbox :option="array.c6" val="f" v-if="!array.c6==''"></checkbox>
                         <ul class="nav navbar-nav navbar-right container-fluid">
                             <li>
                                 <button id="previous" v-if="flag" type="button" class="btn btn-default btn-block btn-lg" v-on:click="onPrev" id="prevb"><b>Previous</b></button>
@@ -65,13 +79,11 @@
                             </li>
                         </ul>
                     </div>
+                </form>
             </div>
-            </form>
         </div>
     </div>
-    </div>
     <script src="/js/test2.js">
-        
     </script>
 </body>
 

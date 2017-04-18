@@ -3,6 +3,15 @@ Vue.component('question', {
     props: ['que', 'id', 'type'],
     template: '<div class="well"><small id="small"> Question {{id}} </small> <small class="pull-right" id="qtype">Type : {{type}}</small><br><h4 style="font-size:25px;">{{que}}</h4></div>'
 })
+function resetAll() {
+    jq('input').prop('checked', false);
+    jq('input[type="text"]').val('');
+    jq('#question').val('');
+    // jq('option').attr('selected', false);
+    // jq("#question_Type").find('option:first').prop('selected', true);
+    vm.fetchQuestions();
+    // vm1.count=0;
+}
 var vm = new Vue({
     el: '#target',
     data() {
@@ -32,6 +41,7 @@ var vm = new Vue({
             });
         },
         edit: function(id, index) {
+            resetAll();
             vm1.count = 0;
             vm2.addBtn = false;
             vm2.id = id;
@@ -78,7 +88,7 @@ var vm = new Vue({
                     jq("#obj1").attr('class', "hidden");
                     jq("#fill_in").attr('class', "hidden");
                     jq("#check").attr('class','');
-                    console.log(vm.questionArray[index].correct_answer[1]);
+                    // console.log(vm.questionArray[index].correct_answer[1]);
                     jq('input[name="checkbox"][value='+vm.questionArray[index].correct_answer[0]+']').prop('checked', true);
                     jq('input[name="checkbox"][value='+vm.questionArray[index].correct_answer[2]+']').prop('checked', true);
                     jq('input[name="checkbox"][value='+vm.questionArray[index].correct_answer[4]+']').prop('checked', true);
@@ -251,15 +261,7 @@ function postQuestion(question) {
     })
 }
 
-function resetAll() {
-    jq('input').prop('checked', false);
-    jq('input[type="text"]').val('');
-    jq('#question').val('');
-    // jq('option').attr('selected', false);
-    // jq("#question_Type").find('option:first').prop('selected', true);
-    vm.fetchQuestions();
-    // vm1.count=0;
-}
+
 
 
 

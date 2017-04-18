@@ -5,6 +5,9 @@ var resultSchema = mongoose.Schema({
     user: {
         type: String
     },
+    id:{
+        type:String
+    },
     answer: [{
         question_Id: {
             type: String

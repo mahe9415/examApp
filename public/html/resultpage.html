@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Result</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="/css/lib/bootstrap-iso.css" /> -->
+    <!-- <link rel="stylesheet" href="/css/lib/fw/css/font-awesome.min.css" /> -->
+    <link rel="stylesheet" href="/css/lib/bootstrap.min.css" />
+    <!-- <link rel="stylesheet" href="/css/exam.css" /> -->
+    <script src="/js/jquery.min.js"></script>
+	<script src="/js/vue@2.2.6.js"></script>
+	<style type="text/css">
+		.container{
+			padding-left:20%;
+			padding-right:20%;
+		}
+		td,th{
+			padding:15px!important;
+			
+		}
+	</style>
+</head>
+<body>
+<nav class="navbar">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#"><img src="/logo.jpg" width="45"></a>
+        </div>
+        <p class="navbar-text" style="color: yellowgreen; padding-top: 30px; margin:0;">NFNLabs</p>
+        <h2 class="navbar-text" style="position:absolute;top:11%;left:40%;">OnlineTest</h2>
+    </nav>
+    <div class="container">
+ <table id="result" class="table table-hover table-bordered table-condensed">
+	<thead>
+		<tr>
+			<!-- <th>Register Number</th> -->
+			<th>Name</th>
+			<th>Mark</th>
+		</tr>
+	</thead> 	
+	<tbody>
+		<tr v-for="student in results">
+			<!-- <td>{student.id}</td> -->
+
+			<td>{{student.user}}</td>
+			<td>{{student.count}}</td>
+		</tr>
+	</tbody>
+ </table>
+ </div>
+ <script type="text/javascript">
+ var jq = $.noConflict();
+ Vue.component('resultbox',{
+ 	props:[],
+ 	template:{
+ 	}
+ })
+ 	var vm1=new Vue({
+ 		el:'#result',
+ 		data(){
+ 			return{
+ 			results:[]}
+ 		},
+ 		mounted(){
+ 			this.fetchResults()
+ 		},
+ 		methods:{
+ 			fetchResults(){
+ 				jq.get('/fetchResults',function(doc){
+ 					vm1.results=doc;
+ 					console.log(doc);
+ 				})
+ 			}
+ 		}
+
+
+ 	})
+ </script>   
+</body>
+</html>
