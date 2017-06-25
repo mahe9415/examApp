@@ -7,6 +7,7 @@ var qaSchema = mongoose.Schema({
 question :
 {
 	type:String,
+	trim:true
 },
 question_Id:{
 	type:String,
@@ -14,59 +15,98 @@ question_Id:{
 },
 question_Type :{
 	type: String,
-	required:true
+	required:true,
+	set: toLower
 },
 category :
 {
 	type:String,
+	set: toLower
 	// required:true
 },
 	a:{
-		type:String
+		type:String,
+		trim:true,
+		set: toLower
 	},
 	b:{
-		type:String
+		type:String,
+		trim:true,
+		set: toLower
 	},
 	c:{
-		type:String
+		type:String,
+		trim:true,
+		set: toLower
 	},
 	d:{
-		type:String
+		type:String,
+		trim:true,
+		set: toLower
 	},
 	e:{
-		type:String
+		type:String,
+		trim:true,
+		set: toLower
 	},
 	f:{
-		type:String
+		type:String,
+		trim:true,
+		set: toLower
 	},
 	correct_answer:{
-		type:String
+		type:String,
+		trim:true,
+		set: toLower
 	},
 	c1:{
-		type:String
+		type:String,
+		trim:true,
+		set: toLower
 	},
 	c2:{
-		type:String
+		type:String,
+		trim:true,
+		set: toLower
 	},
 	c3:{
-		type:String
+		type:String,
+		trim:true,
+		set: toLower
 	},
 	c4:{
-		type:String
+		type:String,
+		trim:true,
+		set: toLower
 	},
 	c5:{
-		type:String
+		type:String,
+		trim:true,
+		set: toLower
 	},
 	c6:{
-		type:String
+		type:String,
+		trim:true,
+		set: toLower
 	},
+	time:{
+		type:Number
+	}
 });
+
+
 qaSchema.plugin(autoIncrement.plugin, {
     model: 'qa',
     field: 'question_Id',
     startAt: 1,
     incrementBy:1
 });
+
+function toLower (v) {
+	console.log(v.toLowerCase())
+  return v.toLowerCase();
+}
+
 // qaSchema.methods.toJSON =  function(){
 // var question = this;
 //   var questionObject = question.toObject();

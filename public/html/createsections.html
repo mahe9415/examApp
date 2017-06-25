@@ -87,7 +87,7 @@
         <div>
             <button class="btn btn-primary" @click="addNew">Add new
             </button>
-            <input type="text" v-if="box" name="newCategory">
+            <input type="text" id="newc" name="newCategory">
         </div>
     </div>
     <script type="text/javascript">
@@ -96,12 +96,15 @@
         data() {
             return {
                 categories: ['programming', 'quantitive', 'analytical'],
-                box: false
+                
             }
         },
         methods: {
             addNew() {
-                this.box = true
+                if($('#newc').val()=='') {return}
+                this.categories.push($('#newc').val())
+                $('#newc').val('')
+
             }
         }
     })

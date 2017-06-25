@@ -8,12 +8,17 @@ var resultSchema = mongoose.Schema({
     id:{
         type:String
     },
+    dept:{
+      type:String  
+    },
     answer: [{
         question_Id: {
             type: String
         },
         userAnswer: {
-            type: String
+            type: String,
+            set:toLower,
+            trim:true
         },
         ans_validate: {
             type: Boolean
@@ -23,5 +28,10 @@ var resultSchema = mongoose.Schema({
     	type:Number
     }
 });
+
+function toLower (v) {
+    console.log(v.toLowerCase())
+  return v.toLowerCase();
+}
 var result = mongoose.model('result', resultSchema);
 module.exports = { result }

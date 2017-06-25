@@ -14,7 +14,13 @@ function resetAll() {
 }
 var vm = new Vue({
     el: '#target',
+        beforeCreate(){
+            if(!localStorage.admin){
+                window.location.href="/admin"
+            }
+        },
     data() {
+        
         return {
             questionArray: []
         }
@@ -251,7 +257,8 @@ function formValidation() {
         qset.correct_checkbox=correct;
     }
     
-    console.log(qset)
+    qset.time=jq('.time input[type="text"]').val()
+"4"
     return qset
 }
 
@@ -274,6 +281,13 @@ var vm2 = new Vue({
         }
     },
     methods: {
+        clear:function()
+        {
+            vm2.addBtn=true
+    jq('input').prop('checked', false);
+    jq('input[type="text"]').val('');
+    jq('#question').val('');
+        },
         sendForm: function() {
             var data = formValidation()
             if(!data){return}

@@ -142,7 +142,8 @@ var vm = new Vue({
         postAns: function(ans) {
             jq.ajax({
                 headers: {
-                    'x-auth': document.cookie.split('=')[1]
+                    // 'x-auth': document.cookie.split('=')[1]
+                    'x-auth':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OTMwMjVlNjM3MTg3ZDA4YzZjOGRhNzIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNDk2MzI3NjU0fQ.dn5kfy0JdeiZkfY3ZefXPCOXMIMPzIyx9g5_hVVnbJo';
                 },
                 method: 'POST',
                 url: '/result',

@@ -7,7 +7,8 @@ var UserSchema = mongoose.Schema({
 name:{
 	type:String,
 	required: true,
-	minlength:4 
+	minlength:4 ,
+  trim:true
 },
 studentId : {
 	type:String,
@@ -27,8 +28,7 @@ dob :{
   required:true
 },
 college :{
-  type:String,
-  required:true
+  type:String
 },
 tel:
 {
@@ -62,11 +62,7 @@ email: {
       type: String,
       required: true
     }
-  }],
-  address:{
-    type:String,
-    required:true
-  }
+  }]
 });
 UserSchema.methods.generateAuthToken = function () {
   var user = this;

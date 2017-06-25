@@ -3,12 +3,55 @@ var jq = $.noConflict();
 //     props: ['option', 'val'],
 //     template: '<label class="radio well btn-group" data-toggle="buttons" ><input type="radio" :value=val name="ans"  class="rbtn"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle fa-2x"></i><span id="a" style="font-size:20px; padding-left:30px;"></span>{{option}}</label>'
 // });
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
 Vue.component('question', {
-    props: ['que'],
-    template: '<div class="well"><small id="small"> Question</small> <small id="qtype"></small><br><h4 id="question1" style="font-size:25px;">{{que}}</h4></div>'
+    props: ['que','index'],
+    template: '<div class="well q"><small id="small"> Question </small> <small id="qtype">{{index +1}} of {{length}}</small><br><h4 id="question1" style="font-size:20px;">{{que}}</h4></div>',
+    data(){
+        return{
+            length:vm.questionArray.length
+        }
+    }
 });
 Vue.component('text-box', {
     template: '<input type="text" id="fill" name="fill_in_the_blank_answer" autocomplete="off">'
+})
+Vue.component('sidebar',{
+    props:['i'],
+    template:`<li class="box" @click="goto(i)">{{i+1}}</li>`,
+    methods:{
+        goto(i){
+            vm.getUserAns(vm.index)
+            vm.clearAns()
+            vm.displayQuestion(i)
+            vm.index=i
+             var promise = new Promise(function(resolve, reject) {
+              
+                resolve();
+            });
+            promise.then(function() {
+                vm.clearAns();
+                vm.previousAns(vm.index)
+            })
+            // vm.previousAns(vm.index)
+            // vm.getUserAns(vm.index)
+        }
+    }
 })
 // Vue.component('checkbox', {
 //     props: ['option','val'],
@@ -67,6 +110,7 @@ var vm = new Vue({
                     var question_Id = item.question_Id;
                     return { "userAnswer": answer, "question_Id": question_Id, "ans_validate": "" };
                 })
+
                 this.postAns(arr);
                 // window.location.pathname = '/displayResult';
                 return;
@@ -152,34 +196,61 @@ var vm = new Vue({
         postAns: function(ans) {
             jq.ajax({
                 headers: {
-                    'x-auth': document.cookie.split('=')[1]
+                    'x-auth': getCookie('x-auth')
+                    // 'x-auth':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OTMwMjVlNjM3MTg3ZDA4YzZjOGRhNzIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNDk2MzI3NjU0fQ.dn5kfy0JdeiZkfY3ZefXPCOXMIMPzIyx9g5_hVVnbJo'
                 },
                 method: 'POST',
                 url: '/result',
                 data: { "answer": ans },
                 success: function(result) {
-                    // window.location.pathname='/displayResult';
+                    alert("You are Done!!")
+                    document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+                    localStorage.is_loggedin=false;
+                    window.location.pathname='/'
                 }
 
             })
-        }
+        },
+        deleteAllCookies:function() {
+    var cookies = document.cookie.split(";");
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+}
+
     }
 
 });
 
 jq(document).ready(function() {
-    var mins = 0;
-    var sec = 0;
+    if(!localStorage.is_loggedin){
+        window.location='/'
+    }
+    var mins;
+    jq.get('/time',function(data,status){
+         mins=data[0].total
+    })
+    var sec = 59;
     var displayClock = jq("#clock");
     setInterval(function() {
-        if (document.hidden) {
+        if (document.hidden){
             alert("logged out");
-            console.log("hg");
         }
-        if (sec == 59) {
-            mins++;
-            sec = 0;
+        if (sec == 0) {
+            mins--;
+            if(mins==0 && sec==0){
+                g()
+            }
+            sec=60
+            console.log(mins)
         }
-        jq("#clock").text(mins + ":" + sec++)
+        jq("#clock").text(mins-1 + ":" + sec--)
     }, 1000);
+    var g=()=>{
+        vm.index=vm.questionArray.length - 1
+        vm.onNext()
+    }
 })

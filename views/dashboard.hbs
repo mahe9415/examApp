@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/vue@2.2.6.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/lib/bootstrap-iso.css" />
+    <link rel="stylesheet" href="/css/lib/fw/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/css/lib/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/exam.css" />
+    <link rel="stylesheet" href="/css/checkbox.css" />
+    <script type="text/javascript">
+
+         function out() {
+    localStorage.removeItem('admin');
+    window.location.href="/"
+ }
+    </script>
+    <style type="text/css">
+    .well {
+    padding: 23px;
+    background-color: white;
+    border-radius: 3px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border: none;
+    margin-bottom: 5px;
+}
+    
+    .mt-0 {
+        margin-top: 0;
+    }
+    
+    .card {
+        margin-top: 20px;
+        position: relative;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        background: snow;
+    }
+    
+    .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    }
+    
+    .container {
+        padding: 2%;
+    }
+    
+    #heading {
+        background: #5A95F5;
+        margin-top: -20px;
+        /*margin-bottom: 15px;*/
+        border-radius: 3px;
+        position: relative;
+    }
+    
+    .content {
+        color: black;
+    }
+    
+    #fillup {
+        /*border: 1px solid gray;*/
+        border-radius: 0px;
+        width: 100%;
+        /*padding: 4%;*/
+    }
+    .time{
+        width:20%;
+    }
+    .time input{
+        width:35%;
+        text-align: center;
+    }
+    
+    .form {
+        padding-left: 10px;
+    }
+    .btn{
+        margin-right:10px;
+    }
+    .radio {
+        display: inline;
+    }
+    #question_Type{
+        width:25%;
+        /*margin-lef t:38%;*/
+    }
+    .out{
+            float:right;
+            margin-top: -50px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div calss="container-fluid">
+        <a class="navbar-brand" href="#"><img src="/logo.jpg" width="50"></a>
+        <h2 class="well text-center mt-0"> Admin Dashboard</h2>
+
+          <span class="out" onclick="out()">Logout</span>
+    </div>
+    <div class="col-sm-6 container">
+        <!-- <form class="form" id="form1" name="questionForm" autocomplete="off"> -->
+            <div class="form-group">
+                <textarea class="form-control" id="question" name="question" placeholder="Type the Question" rows="10"></textarea>
+            </div>
+            <div class="form-group ">
+                <select class="select form-control"  id="question_Type" name="question_Type">
+                    <option disabled selected>
+                        Question type
+                    </option>
+                    <option value="objective">
+                        Objective
+                    </option>
+                    <option value="fill_in_the_blank_answer">
+                        Fill in the blanks
+                    </option>
+                    <option value="checkbox">
+                    checkbox
+                    </option>
+                </select>
+                     <div class="time">
+       Time <input type="text" value="1"> Min</div>
+
+            </div>
+            <div class="hidden" id="obj1">
+                <!-- <input type="checkbox" id="test1" /> -->
+    <!-- <label for="test1"><input type="text"></label> -->
+                <textbox v-if="count >=1" display="Option A" val="a"></textbox>
+                <textbox v-if="count >=2" display="Option B" val="b"></textbox>
+                <textbox v-if="count >=3" display="Option C" val="c"></textbox>
+                <textbox v-if="count >=4" display="Option D" val="d"></textbox>
+                <textbox v-if="count >=5" display="Option E" val="e"></textbox>
+                <textbox v-if="count >=6" display="Option F" val="f"></textbox>
+                <div class="container-fluid">
+                <button class="btn btn-primary btn-sm pull-right" v-if="count >2" v-on:submit.prevent v-on:click="count=count-1"> Remove Field </button>
+                <button class="btn btn-primary btn-sm pull-right" v-if="count < 6" v-on:submit.prevent v-on:click="count=count+1"> Add Field </button>
+                </div>
+                <div class="form-group text-center ">
+                    Correct Option
+                </div>
+                <div class="form-group text-center">
+                    <rbutton v-if="count >=1" val="a"></rbutton>
+                    <rbutton v-if="count >=2" val="b"></rbutton>
+                    <rbutton v-if="count >=3" val="c"></rbutton>
+                    <rbutton v-if="count >=4" val="d"></rbutton>
+                    <rbutton v-if="count >=5" val="e"></rbutton>
+                    <rbutton v-if="count >=6" val="f"></rbutton>
+            </div>
+            </div>
+            <div class="hidden" id="fill_in">
+                <div class="form-group">
+                    <div class="">
+                        <input class="form-control " placeholder="Answer" id="fillup" name="correct_fillup" type="text" />
+                    </div>
+                </div>
+            </div>
+            <div  class="hidden" id="check">
+                <textbox v-if="count >=1" display="Option A" val="c1"></textbox>
+                <textbox v-if="count >=2" display="Option B" val="c2"></textbox>
+                <textbox v-if="count >=3" display="Option C" val="c3"></textbox>
+                <textbox v-if="count >=4" display="Option D" val="c4"></textbox>
+                <textbox v-if="count >=5" display="Option E" val="c5"></textbox>
+                <textbox v-if="count >=6" display="Option F" val="c6"></textbox>
+                <div class="container-fluid">
+                <button class="btn btn-primary btn-sm pull-right" v-if="count >2" v-on:submit.prevent v-on:click="count=count-1"> Remove Field </button>
+                <button class="btn btn-primary btn-sm pull-right" v-if="count < 6" v-on:submit.prevent v-on:click="count=count+1"> Add Field </button>
+                </div>
+                <div class="form-group text-center ">
+                    Correct Option
+                </div>
+            <div class="form-group text-center" id="cbox">
+            <checkbox v-if="count >=1" val="a"></checkbox>
+            <checkbox v-if="count >=2" val="b"></checkbox>
+            <checkbox v-if="count >=3" val="c"></checkbox>
+            <checkbox v-if="count >=4" val="d"></checkbox>
+            <checkbox v-if="count >=5" val="e"></checkbox>
+            <checkbox v-if="count >=6" val="f"></checkbox>
+            </div>
+            </div>
+            <div class="form-group form-btn text-center" id="btn">
+                <button class="btn btn-success btn-lg" v-if="addBtn" name="submit" v-on:click="sendForm()">
+                    Add
+                </button><button class="btn btn-success btn-lg" name="submit" v-on:click="clear">
+                    Clear
+                </button>
+
+                <button class="btn btn-success btn-lg" v-if="!addBtn" name="submit" v-on:click="updateForm()">Update
+                </button>
+            </div>
+            </div>
+
+        <!-- </form> -->
+    </div>
+    <div class="col-sm-6">
+
+    	<div class="well text-center"><b>Questions</b> <a class="pull-right" href="/res"> View Results </a></div>
+        <div id="target">
+            <div v-for="( que, index) in questionArray">
+                <question :que=que.question :id=index+1 :type=que.question_Type></question>
+                <div class="container-fluid text-center"><button class="btn btn-primary" v-on:click="edit(que.question_Id,index)" >Edit</button><button class="btn btn-danger" v-on:click="del(que.question_Id)">Delete</button></div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/displayQuestion.js"></script>
+</body>
+
+</html>

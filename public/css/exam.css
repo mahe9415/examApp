@@ -1,3 +1,11 @@
+body{
+    /*background: #fff;*/
+}
+.form-group{
+    display: flex;
+    justify-content:space-around;
+}
+
 .list a {
     text-decoration: none;
     color: white;
@@ -6,27 +14,49 @@
 .navbar {
     font-size: 20px;
     width: 100%;
+    background: #F1F1F1;
+    margin-bottom: 0px;
+    padding-bottom: 20px;
 }
 
 .col-md-2,
 .col-lg-2,
 .col-sm-2 {
     background-color: gray;
-    height: 650px;
+    height: 100vh;
     color: white;
     font-size: 20px;
+    padding-top:100px;
+
 }
 
 .col-md-10,
 .col-lg-10,
 .col-sm-10 {
-    background-color: #F1F1F1;
+    /*background-color: #F1F1F1;*/
     height: 650px;
 }
 
 .list {
-    padding: 20px;
+    padding: 0px;
     list-style: none;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.box,.ebox{
+    width: 50px;
+    height: 50px;
+    background: #7ED321;
+    border-radius: 50%;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+.ebox{
+    background: red;
 }
 
 
@@ -46,6 +76,7 @@
 
 .navbar-right li {
     padding: 10px;
+    outline: none;
 }
 
 .navbar-right {
@@ -53,10 +84,17 @@
     padding-top: 19px;
 }
 
-.btn-success {
-    background-color: #27AE60;
+.btn:active:focus, .btn:focus {
+    outline:none;
+    /*outline-offset: -2px;*/
 }
-
+.btn-success,.btn-success:hover,.btn-success:active,.btn-success:focus {
+    background-color: #7ED321;
+    outline: none;
+}
+*{
+    outline: none;
+}
 .btn-success,
 .btn-default {
     width: 100px;
@@ -75,7 +113,19 @@
     margin-top: 0px;
     /* margin-bottom: 6px; */
 }
-
+.category{
+    overflow: hidden;
+    border-bottom: 1px solid gray;
+}
+.category p{
+    padding: 10px;
+    padding-bottom: 0px;
+}
+.instruction{
+    background: #fff;
+    color:gray;
+    border-left:1px solid gray;
+}
 .container-fluid {
     padding-right: 0px;
     padding-left: 0px;
@@ -84,19 +134,24 @@
     padding-bottom: 0px;
 }
 
+.q{
+    border: none;
+    box-shadow: none;
+    padding: 10px !important;
+}
 .well {
     min-height: 6px;
-    padding: 23px;
-    margin-bottom: 0px;
+    padding: 15px;
+    /*margin-bottom: 0px;*/
     background-color: white;
-    border-radius: 0px;
-    border: 1px solid black;
-    border-bottom:none;
+    border-radius: 4px;
+    /*border: 1px solid black;*/
+
 }
 
 .qaa {
-    padding: 0px;
-    margin: 50px;
+    padding: 20px;
+    /*margin: 50px;*/
     background-color: white;
 }
 
@@ -145,10 +200,10 @@ div[data-toggle="buttons"] label.active {
 }
 
 #fill {
-    
-    border-radius: 0px;
-    border: 1px solid black;
-    border-bottom: none;
+    outline: none;
+    border-radius: 4px;
+    border: 1px solid gray;
+    /*border-bottom: none;*/
     width: 100%;
     padding: 4%;
 }
