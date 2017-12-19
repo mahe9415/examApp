@@ -1,6 +1,12 @@
 const express = require('express');
 const hbs = require('hbs');
+const session = require('express-session');
 const mongoose = require("mongoose");
+const MongoStore = require('connect-mongo')(session);
+// const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser')
+// const flash = require('connect-flash');
+const promisify = require('es6-promisify');
 const { User } = require('./models/user');
 const { qa } = require("./models/qa");
 const { result } = require("./models/result")
@@ -12,21 +18,47 @@ const { authenticate } = require('./middleware/authenticate');
 mongoose.Promise = global.Promise;
 
 mongoose.connect('mongodb://localhost:27017/onlineExam');
-var bodyParser = require('body-parser')
 var app = express();
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(session({ secret: "its a secret!" }));
+app.use(session({ secret: "its a secret!" }));
 app.set('view engine', 'hbs');
+
+
+// app.configure(function() {
+//   app.use(express.cookieParser('keyboard cat'));
+//   app.use(express.session({ cookie: { maxAge: 60000 }}));
+//   app.use(flash());
+// });
+// var sessionStore = new session.MemoryStore;
+
+// app.use(cookieParser('secret'));
+// app.use(session({
+//     cookie: { maxAge: 60000 },
+//     store: sessionStore,
+//     saveUninitialized: true,
+//     resave: 'true',
+//     secret: 'secret'
+// }));
+// app.use(flash());
 // app.use(cookieParser());
 hbs.registerPartials(__dirname + './../views/');
 var sess;
+app.get('/', (req, res) => {
+    // req.flash('info', 'Flash is back!');
+    // res.render('index.hbs');
+      // req.flash('success', 'This is a flash message using the express-flash module.');
+      res.render('index.hbs');
+      // res.render('index', { expressFlash: req.flash('success','woooooooo'), sessionFlash: res.locals.sessionFlash });
+});
+
+
+
 //POST QUESTIONS // PostQuestions.html
 app.post('/postQuestions', (req, res) => {
     // console.log(req.body);
     if (req.body.question_Type == 'objective') {
         var body = _.pick(req.body, ['question', 'question_Type', 'category', 'a', 'b', 'c', 'd','e','f','correct_answer','time']);
-        console.log(body);
         var que = new qa(body);
         que.save().then((doc) => {
             res.send("posted");
@@ -47,9 +79,8 @@ app.post('/postQuestions', (req, res) => {
         var body = _.pick(req.body, ['question', 'question_Type', 'category','c1','c2','c3','c4','c5','c6','time']);
         body.correct_answer=req.body.correct_checkbox;
         var que=new qa(body);
-        que.save()
-        .then((doc)=>{
-            res.status(200).send()
+        que.save().then((doc)=>{
+            res.send("posted checkbox");
         }) 
     }
 });
@@ -92,6 +123,11 @@ app.patch("/log",(req,res)=>{
 })  
 app.post("/result",authenticate,(req, res) => {
     var count = 0;
+
+function toLower (v) {
+    console.log(v.toLowerCase())
+  return v.toLowerCase();
+}
     console.log(req.body)
     var body = _.pick(req.body, ['answer']);
     _.forEach(body.answer, function(value, index) {
@@ -99,7 +135,7 @@ app.post("/result",authenticate,(req, res) => {
             // console.log(doc[0].correct_answer)
             // console.log(value.userAnswer+"val")
             // console.log(doc[0].correct_answer+"db")
-            if (value.userAnswer == doc[0].correct_answer) {
+            if (value.userAnswer.trim() == doc[0].correct_answer) {
                 body.answer[index].ans_validate = true
                 count++;
                 // console.log("rigth:"+body.answer[index].tostring());
@@ -171,9 +207,7 @@ app.get('/login', (req, res) => {
     // console.log(req);
 })
 //question render 
-app.get('/', (req, res) => {
-    res.render('index.hbs');
-});
+
 app.get('/reg', (req, res) => {
     res.render('register.hbs');
 });

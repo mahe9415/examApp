@@ -126,7 +126,7 @@ Vue.component('textbox', {
 })
 Vue.component('rbutton', {
     props: ['val'],
-    template: '<div class="radio btn-group" data-toggle="buttons"><label><input type="radio" :value=val name="correct_answer" class="rbtn"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle fa-2x"></i><span style="font-size:20px; padding-left:10px;"></span>{{val}}</label></div>'
+    template: '<div class="radio btn-group" data-toggle="buttons"><label style="display:flex;    align-items: center;"><input type="radio" :value=val name="correct_answer" class="rbtn"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle fa-2x"></i>{{val}}</label></div>'
 })
 var vm1 = new Vue({
     el: '#obj1',
@@ -239,7 +239,7 @@ function formValidation() {
         qset.f = f;
         // qset.correct_answer = correct_answer;
     } else if (question_Type == 'fill_in_the_blank_answer') {
-        qset.correct_fillup = correct_fillup
+        qset.correct_fillup = correct_fillup.toString().toLowerCase().trim()
     } else if(question_Type == 'checkbox')
     {
         qset.c1=c1;

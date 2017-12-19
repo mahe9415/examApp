@@ -1,9 +1,14 @@
 body{
     /*background: #fff;*/
 }
+#cbox, #radioButton{
+    justify-content: center;
+        align-items: baseline;
+}
 .form-group{
     display: flex;
     justify-content:space-around;
+    align-items: center;
 }
 
 .list a {
@@ -22,7 +27,7 @@ body{
 .col-md-2,
 .col-lg-2,
 .col-sm-2 {
-    background-color: gray;
+    /*background-color: gray;*/
     height: 100vh;
     color: white;
     font-size: 20px;
@@ -48,7 +53,7 @@ body{
     width: 50px;
     height: 50px;
     background: #7ED321;
-    border-radius: 50%;
+    border-radius: 12% 36%;
     display:flex;
     align-items:center;
     justify-content: center;
@@ -56,7 +61,7 @@ body{
     cursor: pointer;
 }
 .ebox{
-    background: red;
+    background: #C71585;
 }
 
 
@@ -91,6 +96,7 @@ body{
 .btn-success,.btn-success:hover,.btn-success:active,.btn-success:focus {
     background-color: #7ED321;
     outline: none;
+    border:none;
 }
 *{
     outline: none;
@@ -98,7 +104,6 @@ body{
 .btn-success,
 .btn-default {
     width: 100px;
-    border: 0.5px solid;
 }
 
 
@@ -152,7 +157,7 @@ body{
 .qaa {
     padding: 20px;
     /*margin: 50px;*/
-    background-color: white;
+    /*background-color: white;*/
 }
 
 label.btn span {
@@ -161,6 +166,7 @@ label.btn span {
 
 label input[type="radio"] ~ i.fa.fa-circle-o {
     color: #c8c8c8;
+    margin-right: 10px;
     display: inline;
 }
 
@@ -173,16 +179,17 @@ label input[type="radio"]:checked ~ i.fa.fa-circle-o {
 }
 
 label input[type="radio"]:checked ~ i.fa.fa-check-circle {
-    color: yellowgreen;
+    color: #ECD018;
     display: inline;
+    margin-right: 10px;
 }
 
 label:hover input[type="radio"] ~ i.fa {
-    color: yellowgreen;
+    color: #ECD018;
 }
 
 div[data-toggle="buttons"] label.active {
-    color: yellowgreen;
+    color: #ECD018;
 }
 
 div[data-toggle="buttons"] label:hover {

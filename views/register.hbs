@@ -19,18 +19,15 @@
         margin-top: 2rem;
         margin-left: 2rem;
     }
-    
     #form1 {
         margin:auto;
         max-width:500px;
         color: #B0B0B0;
     }
-    
     legend {
         color: #A9A9A9;
         padding-bottom: 2rem;
     }
-    
     legend>p {
         font-size: 1.5rem;
         color: #BCBCBC;
@@ -79,28 +76,28 @@
 			<div class="form-group">
             <label class="col-xs-4" for="name">Full Name</label>
             <div class="col-xs-8 box">
-            <input class="form-control" type="text" name="name">
+            <input class="form-control" required type="text" name="name">
             </div>
             </div>
             <div class="form-group">
             <label class="col-xs-4" for="studentId">Register Number</label>
             <div class="col-xs-8 box">
-            <input class="form-control" type="text" name="studentId">
+            <input class="form-control" required type="text" name="studentId">
             </div>
             </div> <div class="form-group">
             <label class="col-xs-4" for="department">Department</label>
             <div class="col-xs-8 box">
-            <input class="form-control" type="text" name="department">
+            <input class="form-control" required type="text" name="department">
             </div>
             </div>
             <div class="form-group">
             <label class="col-xs-4" for="name">Email</label>
             <div class="col-xs-8 box">
-            <input class="form-control" type="email" name="email">
+            <input class="form-control" required type="email" name="email">
             </div>
             </div>
             <div class="form-group">
-            <label class=" col-xs-4" for="tel">Phone Number</label>
+            <label class=" col-xs-4" required for="tel">Phone Number</label>
             <div class="col-xs-8 box">
             	<input class="form-control" type="text" name="tel">
             </div>
@@ -109,14 +106,14 @@
            <div class="form-group">
            <label class="col-xs-4">Sex</label>
                <div class="col-xs-8 box inline">
-                <label for="male"><input type="radio" class="radio-inline" name="gender" value="male" id="male"> Male </label>
+                <label for="male"><input type="radio" required class="radio-inline" name="gender" value="male" id="male"> Male </label>
                 <label for="female"><input type="radio" class="radio-inline" id="female" name="gender" value="female"> Female </label>
                </div>
            </div>
            <div class="form-group">
             <label class=" col-xs-4" for="dob">DOB</label>
             <div class="col-xs-8 box">
-                <input class="form-control" type="date" name="dob">
+                <input class="form-control" required type="date" name="dob">
             </div>
            </div>
         <div class="error"></div>
@@ -147,7 +144,7 @@ else if(data.errors){
     err=Object.keys(data.errors)
      for(e of err)
      {
-    $('.error').append('<li>'+e+' required</li>')
+    $('.error').append('<li>'+e+' is not valid</li>')
      }
 }
 else
@@ -160,5 +157,14 @@ else
 )
 })
     </script>
+    <style type="text/css">
+        .error li{
+    list-style: none;
+    color:red;
+        }
+        .error li:first-letter{
+            text-transform: capitalize;
+        }
+    </style>
 </body>
 </html>

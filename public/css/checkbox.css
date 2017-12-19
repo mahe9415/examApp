@@ -10,8 +10,10 @@
 [type="checkbox"]:checked + label {
     position: relative;
     padding-left: 1.95em;
-    /*padding-top: 1.5em;*/
+    padding-top: 1.5rem;
+    margin-right: 1rem;
     cursor: pointer; 
+
 }
 
 /* checkbox aspect */

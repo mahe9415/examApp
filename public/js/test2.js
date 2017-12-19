@@ -81,17 +81,29 @@ var vm = new Vue({
             question: [],
             questionArray: [],
             index: 0,
-            flag: false
+            flag: false,
+            alert:true
         }
     },
     mounted: function() {
         this.fetchQuestions();
     },
     methods: {
+    shuffle : function(sourceArray) {
+    for (var i = 0; i < sourceArray.length - 1; i++) {
+        var j = i + Math.floor(Math.random() * (sourceArray.length - i));
+
+        var temp = sourceArray[j];
+        sourceArray[j] = sourceArray[i];
+        sourceArray[i] = temp;
+    }
+    return sourceArray;
+},
         fetchQuestions: function() {
             jq.get('/log', function(doc) {
-                vm.questionArray = doc;
-                console.log(doc);
+
+                vm.questionArray = vm.shuffle(doc);
+                
                 vm.question.push(vm.questionArray[vm.index]);
             });
         },
@@ -105,7 +117,7 @@ var vm = new Vue({
                     if(item.answer==undefined){
                         item.answer=' ';
                     }
-                    var answer = item.answer.toString();
+                    var answer = item.answer.toString().toLowerCase().trim();
                     console.log(answer)
                     var question_Id = item.question_Id;
                     return { "userAnswer": answer, "question_Id": question_Id, "ans_validate": "" };
@@ -203,6 +215,7 @@ var vm = new Vue({
                 url: '/result',
                 data: { "answer": ans },
                 success: function(result) {
+                    vm.alert=false;
                     alert("You are Done!!")
                     document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
                     localStorage.is_loggedin=false;
@@ -254,3 +267,8 @@ jq(document).ready(function() {
         vm.onNext()
     }
 })
+
+ window.onbeforeunload = function ()
+ {  if(vm.alert)
+     return "";
+ };
