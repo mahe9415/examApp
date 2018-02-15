@@ -1,5 +1,6 @@
 const MongoClient = require('mongodb').MongoClient;
-MongoClient.connect('mongodb://localhost:27017/onlineExam',(err,db)=>{	
+MongoClient.connect('mongodb://mahe:123@ds235788.mlab.com:35788/exam',(err,db)=>{
+console.log(err)	
 	 n=db;
 	})
 

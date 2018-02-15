@@ -12,12 +12,12 @@ const { qa } = require("./models/qa");
 const { result } = require("./models/result")
 const { MongoClient } = require("./db/mongo");
 const _ = require("lodash");
-const { authenticate } = require('./middleware/authenticate');
+const { authenticate } = require('./middleware/authenticate',);
 // const session = require('express-session');
 // const cookieParser = require('cookie-parser');
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://localhost:27017/onlineExam');
+mongoose.connect('mongodb://mahe:123@ds235788.mlab.com:35788/exam');
 var app = express();
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -264,7 +264,7 @@ $group: {
     res.send(doc)
 })  
 })
-app.listen('3000', '0.0.0.0');
+app.listen('3000');
 
 
 // db.getCollection('questions').aggregate([{

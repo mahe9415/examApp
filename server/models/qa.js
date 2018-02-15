@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const _ = require("lodash");
 const autoIncrement = require('mongoose-auto-increment');
-var connection=mongoose.createConnection('mongodb://localhost:27017/onlineExam');
+var connection=mongoose.createConnection('mongodb://mahe:123@ds235788.mlab.com:35788/exam');
 autoIncrement.initialize(connection);
 var qaSchema = mongoose.Schema({
 question :
